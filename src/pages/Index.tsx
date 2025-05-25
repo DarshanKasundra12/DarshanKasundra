@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
@@ -8,6 +9,7 @@ import Projects from "@/components/Projects";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import CursorBubble from "@/components/CursorBubble";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -36,21 +38,24 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <Navbar activeSection={activeSection} />
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Hero />
-        <Skills />
-        <Projects />
-        <About />
-        <Contact />
-        <Footer />
-      </motion.div>
-    </div>
+    <ThemeProvider>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-950 transition-colors duration-300">
+        <CursorBubble />
+        <Navbar activeSection={activeSection} />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <Hero />
+          <Skills />
+          <Projects />
+          <About />
+          <Contact />
+          <Footer />
+        </motion.div>
+      </div>
+    </ThemeProvider>
   );
 };
 
