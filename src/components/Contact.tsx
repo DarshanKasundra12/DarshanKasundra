@@ -37,8 +37,8 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "hello@example.com",
-      href: "mailto:hello@example.com"
+      value: "darshan@example.com",
+      href: "mailto:darshan@example.com"
     },
     {
       icon: Phone,
@@ -55,7 +55,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-950 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,11 +64,11 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
             Get In 
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Touch</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors duration-300">
             Have a project in mind? Let's work together to bring your ideas to life
           </p>
         </motion.div>
@@ -82,10 +82,10 @@ const Contact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
                 Let's start a conversation
               </h3>
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed transition-colors duration-300">
                 I'm always interested in new opportunities and exciting projects. 
                 Whether you have a question or just want to say hi, feel free to reach out!
               </p>
@@ -101,16 +101,16 @@ const Contact = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 * index }}
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 group"
+                  className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 group border border-gray-100 dark:border-gray-700"
                 >
                   <div className="flex-shrink-0">
-                    <div className="p-3 bg-gradient-to-r from-blue-100 to-purple-100 rounded-lg text-blue-600 group-hover:scale-110 transition-transform duration-300">
+                    <div className="p-3 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 rounded-lg text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
                       <info.icon size={20} />
                     </div>
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">{info.label}</p>
-                    <p className="text-gray-600">{info.value}</p>
+                    <p className="font-medium text-gray-900 dark:text-white transition-colors duration-300">{info.label}</p>
+                    <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">{info.value}</p>
                   </div>
                 </motion.a>
               ))}
@@ -123,11 +123,11 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="shadow-2xl border-0 bg-white">
+            <Card className="shadow-2xl border-0 bg-white dark:bg-gray-800 transition-colors duration-300">
               <CardContent className="p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
                       Name
                     </label>
                     <Input
@@ -137,13 +137,13 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      className="w-full border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition-colors duration-300"
                       placeholder="Your name"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
                       Email
                     </label>
                     <Input
@@ -153,13 +153,13 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      className="w-full border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition-colors duration-300"
                       placeholder="your.email@example.com"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
                       Message
                     </label>
                     <Textarea
@@ -169,7 +169,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
-                      className="w-full border-gray-300 focus:border-blue-500 focus:ring-blue-500 resize-none"
+                      className="w-full border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 resize-none dark:bg-gray-700 dark:text-white transition-colors duration-300"
                       placeholder="Tell me about your project..."
                     />
                   </div>
