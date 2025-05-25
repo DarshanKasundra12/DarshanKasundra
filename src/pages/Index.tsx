@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
+import Certificates from "@/components/Certificates";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -16,7 +17,7 @@ const Index = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "skills", "projects", "about", "contact"];
+      const sections = ["home", "skills", "projects", "certificates", "about", "contact"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -50,6 +51,7 @@ const Index = () => {
           <Hero />
           <Skills />
           <Projects />
+          <Certificates />
           <About />
           <Contact />
           <Footer />
