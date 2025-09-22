@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Cloud, ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,7 +10,7 @@ const Projects = () => {
       id: 1,
       title: "Eklavya - Modern Learning Management System",
       description: "Eklavya is a full-featured Learning Management System (LMS) providing an exceptional learning experience with course discovery, enrollment, AI-powered examinations, and an interactive UI for students and teachers..",
-      image: "public/Project Image/EklavyHome.png",
+      image: "/Project Image/EklavyHome.png",
       technologies: ['React',
         'Next.js',
        ' TailwindCSS',
@@ -30,7 +29,7 @@ const Projects = () => {
       id: 2,
       title: "E-Commerce Platform",
       description: "A full-stack e-commerce solution with modern UI, payment integration.But the database is currently no worked.",
-      image: "public/Project Image/Ecommerce-Home.png",
+      image: "/Project Image/Ecommerce-Home.png",
       technologies: ["React", "Node.js", "MongoDB", "Express"],
       liveUrl: "https://e-commerce-s92u.onrender.com/",
       githubUrl: "https://github.com/DarshanKasundra12/E-Commerce",
@@ -40,7 +39,7 @@ const Projects = () => {
       id: 3,
       title: "FitConnect",
       description: "Fit Connect is likely a fitness platform designed to connect Fit.",
-      image: "public/Project Image/FitConnectApp.png",
+      image: "/Project Image/FitConnectApp.png",
       technologies: ['Flutter',
         'Firebase',
         'Provider',
