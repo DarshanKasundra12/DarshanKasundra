@@ -1,73 +1,64 @@
-# Welcome to your Lovable project
+# Skill Sync Folio
 
-## Project info
+![Portfolio Banner](public/Project%20Image/EklavyHome.png)
 
-**URL**: https://lovable.dev/projects/1f724433-21b9-47f4-bd10-7bed8379a5b5
+A modern, responsive, and SEO-friendly portfolio website built with React, TypeScript, Tailwind CSS, and Framer Motion. Showcase your skills, projects, certificates, and professional journey in style.
 
-## How can I edit this code?
+## 🚀 Features
 
-There are several ways of editing your application.
+- ✨ Beautiful, animated UI with Framer Motion
+- 🌙 Light & Dark mode toggle
+- 📱 Fully responsive (mobile-first)
+- 🏷️ Skills, Projects, Certificates, and Experience sections
+- 📜 Downloadable resume
+- 🔗 Social/contact links
+- 🧑‍💻 Clean, maintainable code structure
+- ⚡ Fast and SEO optimized
 
-**Use Lovable**
+## 🖥️ Demo
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/1f724433-21b9-47f4-bd10-7bed8379a5b5) and start prompting.
+[Live Portfolio Demo](https://your-portfolio-url.com/)
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📸 Screenshots
 
-**Use your preferred IDE**
+| Home | Certificates | Experience | Contact |
+|------|--------------|------------|---------|
+| ![](public/Project%20Image/EklavyHome.png) | ![](public/Project%20Image/FitConnectApp.png) | ![](public/Project%20Image/Ecommerce-Home.png) | ![](public/Google-Cloud.png) |
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Tech Stack
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Vite](https://vitejs.dev/)
 
-Follow these steps:
+## 📂 Folder Structure
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+├── public/
+│   ├── Project Image/
+│   └── ...
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── hooks/
+│   ├── contexts/
+│   └── ...
+├── index.html
+├── package.json
+└── ...
 ```
 
-**Edit a file directly in GitHub**
+## 🧑‍💼 Author
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+**Darshan Kasundra**  
+[LinkedIn](https://www.linkedin.com/in/darshankasundra/) • [GitHub](https://github.com/DarshanKasundra12) • [Email](mailto:darshankasundra0@gmail.com)
 
-**Use GitHub Codespaces**
+## 📄 License
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+This project is licensed under the MIT License.
 
-## What technologies are used for this project?
+---
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/1f724433-21b9-47f4-bd10-7bed8379a5b5) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+> Crafted with ❤️ by Darshan Kasundra
