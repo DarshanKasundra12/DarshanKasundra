@@ -7,17 +7,17 @@ const Footer = () => {
     {
       name: "GitHub",
       icon: Github,
-      href: "https://github.com",
+      href: "https://github.com/DarshanKasundra12",
     },
     {
       name: "LinkedIn",
       icon: Linkedin,
-      href: "https://linkedin.com",
+      href: "https://www.linkedin.com/in/darshan-kasundra12/",
     },
     {
       name: "Email",
       icon: Mail,
-      href: "mailto:hello@example.com",
+      href: "mailto:darshankasundra0@gmail.com",
     },
   ];
 
@@ -36,10 +36,10 @@ const Footer = () => {
               className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
               whileHover={{ scale: 1.05 }}
             >
-              Let's Build Something Amazing
+              From keyboard strokes to volleyball spikes
             </motion.h3>
             <p className="text-gray-400 mt-2">
-              Ready to start your next project? Let's connect!
+              I code with precision and play with teamwork
             </p>
           </div>
 
@@ -73,7 +73,7 @@ const Footer = () => {
                 className="text-gray-400"
                 whileHover={{ scale: 1.02 }}
               >
-                © 2024 Darshan Kasundra. All rights reserved.
+                © 2025 Darshan Kasundra. All rights reserved.
               </motion.p>
               <div className="flex items-center text-gray-400">
                 <span>Made with</span>
@@ -87,7 +87,7 @@ const Footer = () => {
                 >
                   <Heart size={16} className="text-red-500" fill="currentColor" />
                 </motion.div>
-                <span>using React & Tailwind CSS</span>
+                <span>By ME</span>
               </div>
             </div>
           </div>

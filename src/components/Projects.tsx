@@ -1,71 +1,55 @@
 
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { Cloud, ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Provider } from "@radix-ui/react-toast";
 
 const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      description: "A full-stack e-commerce solution with modern UI, payment integration, and admin dashboard.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
-      technologies: ["React", "TypeScript", "Node.js", "PostgreSQL", "Stripe"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com",
+      title: "Eklavya - Modern Learning Management System",
+      description: "Eklavya is a full-featured Learning Management System (LMS) providing an exceptional learning experience with course discovery, enrollment, AI-powered examinations, and an interactive UI for students and teachers..",
+      image: "public/Project Image/EklavyHome.png",
+      technologies: ['React',
+        'Next.js',
+       ' TailwindCSS',
+        'TypeScript',
+        'Prisma',
+        'MySQL',
+        'Clerk',
+        'Razor Pay',
+        'Uploadthing',
+        'Vercel'],
+      liveUrl: "https://eklavya-lms-z19t.onrender.com//",
+      githubUrl: "https://github.com/Kunj-Mori/Eklavya-LMS",
       featured: true
     },
     {
       id: 2,
-      title: "Task Management App",
-      description: "Collaborative project management tool with real-time updates and team collaboration features.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
-      technologies: ["Next.js", "Tailwind CSS", "Supabase", "Framer Motion"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com",
+      title: "E-Commerce Platform",
+      description: "A full-stack e-commerce solution with modern UI, payment integration.But the database is currently no worked.",
+      image: "public/Project Image/Ecommerce-Home.png",
+      technologies: ["React", "Node.js", "MongoDB", "Express"],
+      liveUrl: "https://e-commerce-s92u.onrender.com/",
+      githubUrl: "https://github.com/DarshanKasundra12/E-Commerce",
       featured: true
     },
     {
       id: 3,
-      title: "Portfolio Website",
-      description: "Responsive portfolio website with dynamic content management and smooth animations.",
-      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop",
-      technologies: ["React", "Framer Motion", "Tailwind CSS", "Vercel"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com",
-      featured: false
-    },
-    {
-      id: 4,
-      title: "Weather Dashboard",
-      description: "Beautiful weather application with location-based forecasts and interactive charts.",
-      image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&h=400&fit=crop",
-      technologies: ["Vue.js", "Chart.js", "OpenWeather API", "CSS3"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com",
-      featured: false
-    },
-    {
-      id: 5,
-      title: "Social Media App",
-      description: "Modern social platform with real-time messaging, posts, and user interactions.",
-      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop",
-      technologies: ["React Native", "Firebase", "Redux", "Socket.io"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com",
-      featured: false
-    },
-    {
-      id: 6,
-      title: "Analytics Dashboard",
-      description: "Data visualization dashboard with interactive charts and real-time analytics.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
-      technologies: ["React", "D3.js", "Node.js", "MongoDB"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com",
-      featured: false
+      title: "FitConnect",
+      description: "Fit Connect is likely a fitness platform designed to connect Fit.",
+      image: "public/Project Image/FitConnectApp.png",
+      technologies: ['Flutter',
+        'Firebase',
+        'Provider',
+        'Dart'],
+      liveUrl: "https://fit-connect-mocha.vercel.app/",
+      githubUrl: "https://github.com/DarshanKasundra12/FitConnect",
+      featured: true
     }
+    
   ];
 
   const containerVariants = {

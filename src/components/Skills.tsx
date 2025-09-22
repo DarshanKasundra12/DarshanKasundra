@@ -13,55 +13,69 @@ import {
 
 const Skills = () => {
   const skills = [
-    {
-      name: "React & Next.js",
-      icon: Code2,
-      description: "Building modern, scalable web applications",
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      name: "TypeScript",
-      icon: Code2,
-      description: "Type-safe development for robust applications",
-      color: "from-indigo-500 to-purple-500"
-    },
-    {
-      name: "UI/UX Design",
-      icon: Palette,
-      description: "Creating beautiful, intuitive user interfaces",
-      color: "from-pink-500 to-rose-500"
-    },
-    {
-      name: "Responsive Design",
-      icon: Smartphone,
-      description: "Mobile-first, cross-device compatibility",
-      color: "from-green-500 to-emerald-500"
-    },
-    {
-      name: "Web Performance",
-      icon: Zap,
-      description: "Optimizing for speed and user experience",
-      color: "from-yellow-500 to-orange-500"
-    },
-    {
-      name: "Modern CSS",
-      icon: Monitor,
-      description: "Tailwind CSS, CSS Grid, Flexbox, Animations",
-      color: "from-purple-500 to-violet-500"
-    },
-    {
-      name: "APIs & Backend",
-      icon: Database,
-      description: "RESTful APIs, GraphQL, and database integration",
-      color: "from-teal-500 to-cyan-500"
-    },
-    {
-      name: "Version Control",
-      icon: GitBranch,
-      description: "Git workflows and collaborative development",
-      color: "from-gray-500 to-slate-500"
-    }
-  ];
+  {
+    name: "Node.js",
+    icon: Code2,
+    description: "JavaScript runtime for scalable backend development",
+    color: "from-indigo-500 to-purple-500"
+  },
+  {
+    name: "React.js",
+    icon: Code2,
+    description: "Building modern, component-based web interfaces",
+    color: "from-blue-500 to-cyan-500"
+  },
+  {
+    name: "MongoDB",
+    icon: Database,
+    description: "NoSQL database for flexible, JSON-based data storage",
+    color: "from-green-500 to-emerald-500"
+  },
+  {
+    name: "PHP",
+    icon: Code2,
+    description: "Server-side scripting for web backend development",
+    color: "from-pink-500 to-purple-500"
+  },
+  {
+    name: "SQL",
+    icon: Database,
+    description: "Structured query language for relational databases",
+    color: "from-yellow-500 to-orange-500"
+  },
+  {
+    name: "Java",
+    icon: Code2,
+    description: "Strongly typed, object-oriented programming language",
+    color: "from-orange-500 to-red-500"
+  },
+  {
+    name: "Supabase",
+    icon: Database,
+    description: "Open-source Firebase alternative with Postgres & auth",
+    color: "from-teal-500 to-cyan-500"
+  },
+  {
+    name: "Git",
+    icon: GitBranch,
+    description: "Version control and collaborative development with Git",
+    color: "from-gray-500 to-slate-500"
+  },
+  {
+    name: "Docker",
+    icon: Monitor,
+    description: "Containerization for consistent development and deployment",
+    color: "from-blue-800 to-gray-900"
+  },
+  {
+    name: "Ethical Hacking",
+    icon: Zap,
+    description: "Security testing, vulnerability analysis, and penetration testing",
+    color: "from-red-500 to-black"
+  }
+];
+
+  
 
   const containerVariants = {
     hidden: { opacity: 0 },

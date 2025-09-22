@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Moon, Sun } from "lucide-react";
@@ -14,10 +13,11 @@ const Navbar = ({ activeSection }: NavbarProps) => {
   const { isDark, toggleTheme } = useTheme();
 
   const navItems = [
-    { id: "home", label: "Home" },
+    { id: "hero", label: "Home" },
     { id: "skills", label: "Skills" },
     { id: "projects", label: "Projects" },
     { id: "certificates", label: "Certificates" },
+    { id: "experience", label: "Experience" }, // Added Experience section
     { id: "about", label: "About" },
     { id: "contact", label: "Contact" },
   ];
@@ -31,11 +31,20 @@ const Navbar = ({ activeSection }: NavbarProps) => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
-    }
+    setIsOpen(false); // Close menu immediately for mobile
+    setTimeout(() => {
+      if (sectionId === "hero" || sectionId === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const yOffset = window.innerWidth < 768 ? 70 : 80; // adjust for navbar height
+        const y =
+          element.getBoundingClientRect().top + window.pageYOffset - yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }, 10); // Delay to allow menu to close and not block scroll
   };
 
   return (
@@ -54,7 +63,7 @@ const Navbar = ({ activeSection }: NavbarProps) => {
             whileHover={{ scale: 1.05 }}
             className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
           >
-            Portfolio
+            DC Kasundra
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -114,6 +123,14 @@ const Navbar = ({ activeSection }: NavbarProps) => {
         </div>
 
         {/* Mobile Navigation */}
+        {/* Overlay should be before the menu and not block the menu itself */}
+        {isOpen && (
+          <div
+            className="fixed inset-0 z-40 bg-black/30 md:hidden"
+            onClick={() => setIsOpen(false)}
+            style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
+          />
+        )}
         <motion.div
           initial={false}
           animate={{
@@ -121,7 +138,8 @@ const Navbar = ({ activeSection }: NavbarProps) => {
             opacity: isOpen ? 1 : 0,
           }}
           transition={{ duration: 0.3 }}
-          className="md:hidden overflow-hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-lg mt-2 shadow-lg"
+          className="md:hidden overflow-hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-lg mt-2 shadow-lg z-50 fixed left-0 right-0 top-16 mx-2"
+          style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navItems.map((item) => (

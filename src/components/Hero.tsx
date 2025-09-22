@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -38,7 +37,10 @@ const Hero = () => {
   const name = "Darshan Kasundra";
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-950">
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-950"
+    >
       {/* Enhanced animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating particles */}
@@ -63,7 +65,7 @@ const Hero = () => {
             }}
           />
         ))}
-        
+
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -120,7 +122,7 @@ const Hero = () => {
               >
                 <Sparkles size={32} />
               </motion.div>
-              
+
               <motion.h1
                 variants={nameVariants}
                 initial="hidden"
@@ -139,10 +141,14 @@ const Hero = () => {
                         textShadow: "0 0 8px #3B82F6",
                       }}
                       style={{
-                        background: letter === " " ? "transparent" : "linear-gradient(45deg, #3B82F6, #8B5CF6, #EC4899)",
+                        background:
+                          letter === " "
+                            ? "transparent"
+                            : "linear-gradient(45deg, #3B82F6, #8B5CF6, #EC4899)",
                         backgroundClip: "text",
                         WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: letter === " " ? "transparent" : "transparent",
+                        WebkitTextFillColor:
+                          letter === " " ? "transparent" : "transparent",
                         color: letter === " " ? "transparent" : undefined,
                       }}
                     >
@@ -151,7 +157,7 @@ const Hero = () => {
                   ))}
                 </span>
               </motion.h1>
-              
+
               <motion.div
                 animate={{
                   rotate: [0, -360],
@@ -173,20 +179,21 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
               className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight"
             >
-              Frontend{" "}
+              Full Stack{" "}
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Developer
+                Web Developer
               </span>
             </motion.h2>
-            
+
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.0 }}
               className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
             >
-              Crafting beautiful, responsive web experiences with modern technologies
-              and attention to detail
+              Dedicated IT student Chandu Bhai S Patel Institute of Technology
+              with hands-on experience in MERN. Interned BITSINFOTECH, enhancing
+              skills in website development.
             </motion.p>
           </motion.div>
 
@@ -196,22 +203,19 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 1.2 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
-                onClick={scrollToProjects}
+                onClick={() => window.open("/resume.pdf", "_blank")}
                 size="lg"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                View My Work
+                Resume
               </Button>
             </motion.div>
-            
+
             <div className="flex space-x-4">
               <motion.a
-                href="https://github.com"
+                href="https://github.com/DarshanKasundra12"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2, rotate: 5 }}
@@ -221,7 +225,7 @@ const Hero = () => {
                 <Github size={24} />
               </motion.a>
               <motion.a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/darshan-kasundra12/"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2, rotate: -5 }}
@@ -231,7 +235,7 @@ const Hero = () => {
                 <Linkedin size={24} />
               </motion.a>
               <motion.a
-                href="mailto:contact@example.com"
+                href="mailto:darshankasundra0@gmail.com"
                 whileHover={{ scale: 1.1, y: -2, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
@@ -244,7 +248,7 @@ const Hero = () => {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="absolute top-128 left-1/2 transform -translate-x-1/2"
           >
             <ArrowDown className="text-gray-400 dark:text-gray-500" size={24} />
           </motion.div>
