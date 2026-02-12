@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
-import { Download, MapPin, Calendar, Coffee } from "lucide-react";
+import { Download, MapPin, Calendar, Rocket, Code, Layers, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const About = () => {
   const stats = [
-    { label: "Experience", value: "3 Month", icon: Calendar },
-    { label: "Projects Built", value: "5+", icon: Coffee },
-    { label: "Tech Stack", value: "10+", icon: Coffee },
-    { label: "Team Activities", value: "Volley Enthusiast", icon: Coffee },
+    { label: "Experience", value: "6 Month", icon: Calendar },
+    { label: "Projects Built", value: "8+", icon: Code },
+    { label: "Tech Stack", value: "12+", icon: Layers },
+    { label: "Client Deliveries", value: "1", icon: Rocket },
+    { label: "Team Activities", value: "Volley Enthusiast", icon: Users },
   ];
 
   return (
@@ -101,7 +102,7 @@ const About = () => {
           >
             <div className="relative">
               <img
-                src="Darshan.jpg"
+                src="Darshan.png"
                 alt="Darshan Kasundra Profile"
                 className="w-full max-w-md mx-auto rounded-2xl shadow-2xl"
               />
@@ -115,7 +116,7 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
+          className="mt-16 flex flex-wrap justify-center gap-8"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -124,7 +125,7 @@ const About = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 * index }}
-              className="text-center group"
+              className="text-center group min-w-[140px]"
             >
               <div className="inline-flex p-4 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-blue-400 mb-4 group-hover:scale-110 transition-all duration-300">
                 <stat.icon size={24} />

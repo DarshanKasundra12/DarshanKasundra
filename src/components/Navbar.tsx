@@ -61,9 +61,15 @@ const Navbar = ({ activeSection }: NavbarProps) => {
         <div className="flex justify-between items-center h-16">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            className="flex items-center gap-2 font-bold text-xl cursor-pointer"
+            onClick={() => scrollToSection('hero')}
           >
-            DC Kasundra
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-purple-600 text-white shadow-lg">
+              DC
+            </div>
+            <span className="hidden sm:block bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+              Kasundra
+            </span>
           </motion.div>
 
           {/* Desktop Navigation */}

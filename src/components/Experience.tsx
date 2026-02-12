@@ -2,6 +2,12 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
+    company: "Digimonk Solutions",
+    role: "Software Engineer",
+    period: "Jan 2026 - Present",
+    description: "Developing and maintaining full-stack web applications using MongoDB, Express.js, React, and Node.js in a collaborative company environment."
+  },
+  {
     company: "AIGETAI",
     role: "Backend  Developer Internship",
     period: "May 2025 - Aug 2025",

@@ -1,36 +1,33 @@
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Send, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
+  const [message, setMessage] = useState("");
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    toast({
-      title: "Message sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
-    });
-    setFormData({ name: "", email: "", message: "" });
-  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    if (!message.trim()) {
+      toast({
+        title: "Empty Message",
+        description: "Please enter a message to start the chat.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Replace with your actual WhatsApp number
+    const phoneNumber = "6351027968"; 
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
+    setMessage("");
   };
 
   const contactInfo = [
@@ -119,62 +116,40 @@ const Contact = () => {
           >
             <Card className="shadow-2xl border-0 bg-white dark:bg-gray-800 transition-colors duration-300">
               <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-                      Name
-                    </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition-colors duration-300"
-                      placeholder="Your name"
-                    />
-                  </div>
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                    <MessageCircle className="text-green-500" size={28} />
+                    Chat on WhatsApp
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Directly send me a message on WhatsApp for quick response.
+                  </p>
+                </div>
 
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-                      Email
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition-colors duration-300"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-
+                <form onSubmit={handleSendMessage} className="space-y-6">
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-                      Message
+                      Your Message
                     </label>
                     <Textarea
                       id="message"
                       name="message"
                       required
-                      value={formData.message}
-                      onChange={handleChange}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                       rows={6}
-                      className="w-full border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 resize-none dark:bg-gray-700 dark:text-white transition-colors duration-300"
-                      placeholder="Tell me about your project..."
+                      className="w-full border-gray-300 dark:border-gray-600 focus:border-green-500 focus:ring-green-500 resize-none dark:bg-gray-700 dark:text-white transition-colors duration-300"
+                      placeholder="Hi Darshan, I'd like to discuss a project..."
                     />
                   </div>
 
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl"
+                    className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white rounded-xl transition-colors duration-300"
                   >
                     <Send size={20} className="mr-2" />
-                    Send Message
+                    Send on WhatsApp
                   </Button>
                 </form>
               </CardContent>
