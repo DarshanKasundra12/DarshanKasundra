@@ -40,7 +40,7 @@ const Index = () => {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-950 transition-colors duration-300">
+      <div className="min-h-screen bg-black text-white selection:bg-black selection:text-black">
         <CursorBubble />
         <Navbar activeSection={activeSection} />
         <motion.div

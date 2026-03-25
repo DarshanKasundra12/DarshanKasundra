@@ -1,9 +1,7 @@
-
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, MessageCircle } from "lucide-react";
+import { Mail, MapPin, Send, MessageCircle, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -13,7 +11,6 @@ const Contact = () => {
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!message.trim()) {
       toast({
         title: "Empty Message",
@@ -22,8 +19,6 @@ const Contact = () => {
       });
       return;
     }
-
-    // Replace with your actual WhatsApp number
     const phoneNumber = "6351027968"; 
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
@@ -31,36 +26,24 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "darshankasundra0@gmail.com",
-      href: "mailto:darshankasundra0@gmail.com"
-    },
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "Ahmedabad, GUJ",
-      href: "#"
-    }
+    { icon: Mail, label: "Email", value: "darshankasundra0@gmail.com", href: "mailto:darshankasundra0@gmail.com" },
+    { icon: MapPin, label: "Location", value: "Ahmedabad, GUJ", href: "#" }
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-950 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 bg-black relative border-t border-zinc-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 font-mono"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-            Get In 
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Touch</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
+            <span className="text-zinc-500">./</span>SayHello<span className="text-zinc-500">.sh</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors duration-300">
-            Have a project in mind? Let's work together to bring your ideas to life
+          <p className="text-xl text-zinc-400 max-w-3xl mx-auto mt-4">
+            // Have a project in mind? Let's work together.
           </p>
         </motion.div>
 
@@ -69,20 +52,19 @@ const Contact = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-                Let's start a conversation
+            <div className="font-mono">
+              <h3 className="text-2xl font-bold text-white mb-4">
+                &gt; Ping Me
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed transition-colors duration-300">
+              <p className="text-zinc-400 text-lg leading-relaxed">
                 I'm always interested in new opportunities and exciting projects. 
-                Whether you have a question or just want to say hi, feel free to reach out!
+                Whether you have a question or just want to say hi, feel free to reach out via console!
               </p>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 font-mono">
               {contactInfo.map((info, index) => (
                 <motion.a
                   key={info.label}
@@ -90,18 +72,16 @@ const Contact = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 * index }}
-                  whileHover={{ x: 5 }}
-                  className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 group border border-gray-100 dark:border-gray-700"
+                  transition={{ delay: 0.1 * index }}
+                  whileHover={{ x: 5, backgroundColor: "#111" }}
+                  className="flex items-center gap-4 p-5 rounded-xl border border-zinc-800 bg-[#0a0a0a] transition-all duration-300 group"
                 >
-                  <div className="flex-shrink-0">
-                    <div className="p-3 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 rounded-lg text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
-                      <info.icon size={20} />
-                    </div>
+                  <div className="p-3 bg-black border border-zinc-800 rounded-lg text-white group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300">
+                    <info.icon size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900 dark:text-white transition-colors duration-300">{info.label}</p>
-                    <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">{info.value}</p>
+                    <p className="font-bold text-zinc-500 text-xs uppercase tracking-wider mb-1">{info.label}</p>
+                    <p className="text-white glow-text">{info.value}</p>
                   </div>
                 </motion.a>
               ))}
@@ -112,48 +92,61 @@ const Contact = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            className="rounded-xl border border-zinc-800 bg-[#0a0a0a] shadow-[0_0_40px_rgba(255,255,255,0.05)] overflow-hidden"
           >
-            <Card className="shadow-2xl border-0 bg-white dark:bg-gray-800 transition-colors duration-300">
-              <CardContent className="p-8">
-                <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-                    <MessageCircle className="text-green-500" size={28} />
-                    Chat on WhatsApp
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    Directly send me a message on WhatsApp for quick response.
-                  </p>
-                </div>
+            <div className="flex items-center px-4 py-3 border-b border-zinc-800 bg-[#111]">
+              <div className="flex space-x-1.5 flex-1">
+                <div className="w-3 h-3 rounded-full bg-zinc-600"></div>
+                <div className="w-3 h-3 rounded-full bg-zinc-500"></div>
+                <div className="w-3 h-3 rounded-full bg-[#25D366]"></div>
+              </div>
+              <div className="flex items-center text-zinc-500 text-xs font-mono font-bold tracking-wider">
+                <Terminal size={12} className="mr-2" />
+                <span>whatsapp-cli.exe</span>
+              </div>
+              <div className="flex-1"></div>
+            </div>
 
-                <form onSubmit={handleSendMessage} className="space-y-6">
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-                      Your Message
-                    </label>
+            <div className="p-8 font-mono">
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+                  <MessageCircle className="text-[#25D366]" size={28} />
+                  [WhatsApp::Chat]
+                </h3>
+                <p className="text-zinc-500 text-sm">
+                  // Execute this command to send a direct message.
+                </p>
+              </div>
+
+              <form onSubmit={handleSendMessage} className="space-y-6">
+                <div>
+                  <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">
+                    Enter Message Payload
+                  </label>
+                  <div className="relative">
+                    <div className="absolute top-4 left-4 text-zinc-600 select-none">&gt;</div>
                     <Textarea
                       id="message"
                       name="message"
-                      required
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      rows={6}
-                      className="w-full border-gray-300 dark:border-gray-600 focus:border-green-500 focus:ring-green-500 resize-none dark:bg-gray-700 dark:text-white transition-colors duration-300"
-                      placeholder="Hi Darshan, I'd like to discuss a project..."
+                      rows={5}
+                      className="w-full bg-black border border-zinc-800 focus:border-white focus:ring-0 resize-none text-white pl-10 pt-4 rounded transition-colors duration-300 font-mono shadow-inner"
+                      placeholder="Type your message here..."
                     />
                   </div>
+                </div>
 
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white rounded-xl transition-colors duration-300"
-                  >
-                    <Send size={20} className="mr-2" />
-                    Send on WhatsApp
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full bg-white text-black hover:bg-zinc-200 uppercase font-bold tracking-wider rounded-none shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] cursor-pointer transition-all duration-300 border border-white"
+                >
+                  <Send size={18} className="mr-2" />
+                  root@run: send
+                </Button>
+              </form>
+            </div>
           </motion.div>
         </div>
       </div>

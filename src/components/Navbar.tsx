@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Menu, X, Moon, Sun } from "lucide-react";
-import { useTheme } from "@/contexts/ThemeContext";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ChevronRight } from "lucide-react";
 
 interface NavbarProps {
   activeSection: string;
@@ -10,28 +9,27 @@ interface NavbarProps {
 const Navbar = ({ activeSection }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { isDark, toggleTheme } = useTheme();
 
   const navItems = [
-    { id: "hero", label: "Home" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "certificates", label: "Certificates" },
-    { id: "experience", label: "Experience" }, // Added Experience section
-    { id: "about", label: "About" },
-    { id: "contact", label: "Contact" },
+    { id: "hero", label: "Home", file: "index.tsx" },
+    { id: "skills", label: "Skills", file: "skills.json" },
+    { id: "projects", label: "Projects", file: "projects.ts" },
+    { id: "certificates", label: "Certificates", file: "certs.md" },
+    { id: "experience", label: "Experience", file: "history.log" },
+    { id: "about", label: "About", file: "whoami.sh" },
+    { id: "contact", label: "Contact", file: "ping.exe" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 30);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    setIsOpen(false); // Close menu immediately for mobile
+    setIsOpen(false);
     setTimeout(() => {
       if (sectionId === "hero" || sectionId === "home") {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -39,132 +37,133 @@ const Navbar = ({ activeSection }: NavbarProps) => {
       }
       const element = document.getElementById(sectionId);
       if (element) {
-        const yOffset = window.innerWidth < 768 ? 70 : 80; // adjust for navbar height
-        const y =
-          element.getBoundingClientRect().top + window.pageYOffset - yOffset;
+        const yOffset = window.innerWidth < 768 ? 70 : 60;
+        const y = element.getBoundingClientRect().top + window.pageYOffset - yOffset;
         window.scrollTo({ top: y, behavior: "smooth" });
       }
-    }, 10); // Delay to allow menu to close and not block scroll
+    }, 10);
   };
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-mono ${
         scrolled
-          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg border-b border-gray-200/20 dark:border-gray-700/20"
+          ? "bg-[#0a0a0a]/90 backdrop-blur-md shadow-lg border-b border-zinc-900"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-14">
+          
+          {/* Logo / Prompt */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-2 font-bold text-xl cursor-pointer"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-3 font-bold cursor-pointer select-none group"
             onClick={() => scrollToSection('hero')}
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-purple-600 text-white shadow-lg">
-              DC
-            </div>
-            <span className="hidden sm:block bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-              Kasundra
-            </span>
+            <img 
+              src="/logo.svg" 
+              alt="Darshan Kasundra Logo" 
+              className="h-24 w-auto drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.7)] transition-all duration-300"
+            />
+            {/* <span className="text-white font-mono font-bold tracking-wider text-sm hidden sm:inline">
+              Darshan<span className="text-zinc-500">.dev</span>
+            </span> */}
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                  activeSection === item.id
-                    ? "text-blue-600 dark:text-blue-400"
-                    : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {item.label}
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  />
-                )}
-              </motion.button>
-            ))}
-            
-            {/* Theme Toggle */}
-            <motion.button
-              onClick={toggleTheme}
-              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-              whileHover={{ scale: 1.1, rotate: 180 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
-            </motion.button>
+          {/* Desktop IDE Tabs Navigation */}
+          <div className="hidden lg:flex items-end h-full pt-2">
+            {navItems.map((item) => {
+              const isActive = activeSection === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`group relative px-4 py-2 flex items-center justify-center gap-2 text-xs font-bold tracking-wider uppercase transition-colors duration-200 border-x border-t rounded-t-lg mx-[1px] ${
+                    isActive
+                      ? "bg-[#111] border-zinc-800 text-white shadow-[0_-5px_20px_rgba(255,255,255,0.05)] z-10"
+                      : "bg-[#050505] border-transparent text-zinc-500 hover:bg-[#0a0a0a] hover:text-zinc-300 z-0"
+                  }`}
+                >
+                  <span className={`${isActive ? 'text-zinc-400' : 'text-zinc-600'}`}>{item.file.split('.')[1]}</span>
+                  {item.label}
+                  
+                  {/* Subtle active line indicator at top of tab */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="tab-indicator"
+                      className="absolute top-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)] rounded-t-lg"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    />
+                  )}
+                  {/* Bottom border cover when active to blend with body */}
+                  {isActive && (
+                    <div className="absolute bottom-[-1px] left-0 right-0 h-[2px] bg-[#111]" />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <motion.button
-              onClick={toggleTheme}
-              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-              whileTap={{ scale: 0.95 }}
-            >
-              {isDark ? <Sun size={20} /> : <Moon size={20} />}
-            </motion.button>
-            <motion.button
+          <div className="lg:hidden flex items-center space-x-2">
+            <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-              whileTap={{ scale: 0.95 }}
+              className="p-2 border border-zinc-800 rounded bg-[#111] text-zinc-400 hover:text-white transition-colors duration-200"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </motion.button>
+              {isOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        {/* Overlay should be before the menu and not block the menu itself */}
+        {/* Mobile Navigation Dropdown */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden overflow-hidden bg-[#0a0a0a] border border-zinc-800 rounded-lg mt-2 shadow-2xl absolute left-4 right-4 z-50 origin-top"
+            >
+              <div className="p-2 space-y-1">
+                <div className="px-3 py-2 text-[10px] text-zinc-600 uppercase font-bold tracking-widest border-b border-zinc-900 mb-2 select-none">
+                  Explorer: Portfolio
+                </div>
+                {navItems.map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`w-full text-left flex items-center px-3 py-2 rounded text-xs tracking-wider transition-colors duration-200 ${
+                        isActive
+                          ? "bg-[#1a1a1a] text-white border-l-2 border-white"
+                          : "text-zinc-400 hover:bg-[#111] hover:text-zinc-200 border-l-2 border-transparent"
+                      }`}
+                    >
+                      <ChevronRight size={14} className={`mr-2 transition-transform ${isActive ? "rotate-90 text-white" : "text-zinc-600"}`} />
+                      <span className={`mr-2 ${isActive ? 'text-zinc-300' : 'text-zinc-600'}`}>{item.file.split('.')[1]}</span>
+                      {item.file}
+                    </button>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Mobile blur overlay */}
         {isOpen && (
           <div
-            className="fixed inset-0 z-40 bg-black/30 md:hidden"
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden mt-16"
             onClick={() => setIsOpen(false)}
-            style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
           />
         )}
-        <motion.div
-          initial={false}
-          animate={{
-            height: isOpen ? "auto" : 0,
-            opacity: isOpen ? 1 : 0,
-          }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden overflow-hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-lg mt-2 shadow-lg z-50 fixed left-0 right-0 top-16 mx-2"
-          style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navItems.map((item) => (
-              <motion.button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                  activeSection === item.id
-                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                    : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800"
-                }`}
-                whileHover={{ x: 4 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {item.label}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </motion.nav>
   );

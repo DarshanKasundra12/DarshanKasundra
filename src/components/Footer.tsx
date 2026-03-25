@@ -1,94 +1,87 @@
-
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, Heart, Terminal, GitBranch, TerminalSquare, Command } from "lucide-react";
 
 const Footer = () => {
   const socialLinks = [
-    {
-      name: "GitHub",
-      icon: Github,
-      href: "https://github.com/DarshanKasundra12",
-    },
-    {
-      name: "LinkedIn",
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/darshan-kasundra12/",
-    },
-    {
-      name: "Email",
-      icon: Mail,
-      href: "mailto:darshankasundra0@gmail.com",
-    },
+    { name: "GitHub", icon: Github, href: "https://github.com/DarshanKasundra12" },
+    { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/darshan-kasundra12/" },
+    { name: "Email", icon: Mail, href: "mailto:darshankasundra0@gmail.com" },
   ];
 
   return (
-    <footer className="bg-gray-900 dark:bg-gray-950 text-white py-12">
+    <footer className="bg-black text-white relative border-t border-zinc-900 pb-4 pt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center space-y-8"
+          className="text-center space-y-8 font-mono"
         >
-          <div>
-            <motion.h3 
-              className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
-              whileHover={{ scale: 1.05 }}
-            >
-              From keyboard strokes to volleyball spikes
-            </motion.h3>
-            <p className="text-gray-400 mt-2">
-              I code with precision and play with teamwork
-            </p>
-          </div>
-
-          <div className="flex justify-center space-x-6">
-            {socialLinks.map((link, index) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ 
-                  scale: 1.1, 
-                  y: -2,
-                  rotate: [0, -10, 10, 0],
-                  transition: { duration: 0.3 }
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="p-3 bg-gray-800 dark:bg-gray-900 rounded-full hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-xl"
-              >
-                <link.icon size={20} />
-              </motion.a>
-            ))}
-          </div>
-
-          <div className="border-t border-gray-800 dark:border-gray-700 pt-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-              <motion.p 
-                className="text-gray-400"
-                whileHover={{ scale: 1.02 }}
-              >
-                © 2025 Darshan Kasundra. All rights reserved.
-              </motion.p>
-              <div className="flex items-center text-gray-400">
-                <span>Made with</span>
-                <motion.div
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 10, -10, 0]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="mx-1"
-                >
-                  <Heart size={16} className="text-red-500" fill="currentColor" />
-                </motion.div>
-                <span>By ME</span>
+          {/* Main Footer Terminal Window */}
+          <div className="rounded-xl border border-zinc-800 bg-[#0a0a0a] overflow-hidden max-w-2xl mx-auto shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+            <div className="flex items-center px-4 py-2 border-b border-zinc-800 bg-[#111]">
+              <div className="flex space-x-1.5 flex-1">
+                <div className="w-2 h-2 rounded-full bg-zinc-600"></div>
+                <div className="w-2 h-2 rounded-full bg-zinc-500"></div>
+                <div className="w-2 h-2 rounded-full bg-zinc-400"></div>
               </div>
+              <div className="flex items-center text-zinc-500 text-[10px] font-bold tracking-wider">
+                <TerminalSquare size={10} className="mr-2" />
+                <span>footer.tsx</span>
+              </div>
+              <div className="flex-1"></div>
+            </div>
+            
+            <div className="p-6">
+              <h3 className="text-xl font-bold text-white tracking-tight mb-2">
+                <span className="text-zinc-500 mr-2">{"//"}</span>
+                From keyboard strokes to volleyball spikes
+              </h3>
+              <p className="text-zinc-500 text-sm">
+                I code with precision and play with teamwork
+              </p>
+
+              <div className="flex justify-center space-x-4 mt-6">
+                {socialLinks.map((link, index) => (
+                  <motion.a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.1, backgroundColor: "#fff", color: "#000" }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 px-4 py-2 bg-black border border-zinc-700 rounded-md text-zinc-300 transition-colors duration-300"
+                  >
+                    <link.icon size={16} />
+                    <span className="text-xs uppercase font-bold tracking-wider">{link.name}</span>
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* VS Code Style Bottom Status Bar */}
+          <div className="mt-8 mx-auto max-w-5xl flex flex-col sm:flex-row justify-between items-center text-[10px] sm:text-xs text-zinc-500 uppercase font-bold tracking-wider bg-[#111] px-4 py-2 rounded-md border border-zinc-800">
+            <div className="flex items-center space-x-4 mb-2 sm:mb-0 hidden sm:flex">
+              <span className="flex items-center hover:text-white cursor-pointer transition-colors"><GitBranch size={12} className="mr-1" /> main</span>
+              <span className="hover:text-white cursor-pointer transition-colors">UTF-8</span>
+              <span className="hover:text-white cursor-pointer transition-colors">React TypeScript</span>
+            </div>
+            
+            <div className="flex items-center text-zinc-400">
+              <Command size={12} className="mr-1" />
+              <span>2025 Darshan Kasundra</span>
+            </div>
+
+            <div className="flex items-center space-x-1">
+              <span>Made with</span>
+              <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1, repeat: Infinity }} className="mx-1">
+                <Heart size={12} className="text-white" fill="white" />
+              </motion.div>
+              <span>By ME</span>
             </div>
           </div>
         </motion.div>
