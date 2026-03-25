@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Terminal } from "lucide-react";
 
 const experiences = [
   {
@@ -9,12 +10,12 @@ const experiences = [
   },
   {
     company: "AIGETAI",
-    role: "Backend  Developer Internship",
+    role: "Backend Developer Internship",
     period: "May 2025 - Aug 2025",
     description: "Developed scalable backend APIs with Node.js, Express, and Mongoose, designed dynamic MongoDB schemas for various application features, and built admin-side CRUD operations with a chat-based support system."
   },
   {
-    company: "BITSINFOTECH ",
+    company: "BITSINFOTECH",
     role: "MERN Developer Internship",
     period: "May 2024 - July 2024",
     description: "Contributed to the development and optimization of a MERN stack website by designing user-friendly React interfaces and resolving software issues."
@@ -23,40 +24,68 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-20 bg-black relative">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 font-mono"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-            Experience
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
+            <span className="text-zinc-500">cat </span>experience.log
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors duration-300">
-            My professional work and internship journey
+          <p className="text-xl text-zinc-400 max-w-3xl mx-auto mt-4">
+            // My professional work and internship journey
           </p>
         </motion.div>
-        <div className="space-y-8">
-          {experiences.map((exp, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.2 }}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col md:flex-row md:items-center gap-4"
-            >
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-1">{exp.role}</h3>
-                <p className="text-gray-900 dark:text-white font-medium mb-1">{exp.company}</p>
-                <p className="text-gray-500 dark:text-gray-400 text-sm mb-2">{exp.period}</p>
-                <p className="text-gray-700 dark:text-gray-300">{exp.description}</p>
-              </div>
-            </motion.div>
-          ))}
+        
+        <div className="relative rounded-xl border border-zinc-800 bg-[#0a0a0a] shadow-[0_0_30px_rgba(255,255,255,0.05)] overflow-hidden">
+          <div className="flex items-center px-4 py-3 border-b border-zinc-800 bg-[#111]">
+            <div className="flex space-x-1.5 flex-1">
+              <div className="w-3 h-3 rounded-full bg-zinc-600"></div>
+              <div className="w-3 h-3 rounded-full bg-zinc-500"></div>
+              <div className="w-3 h-3 rounded-full bg-zinc-400"></div>
+            </div>
+            <div className="flex items-center text-zinc-500 text-xs font-mono font-bold tracking-wider">
+              <Terminal size={12} className="mr-2" />
+              <span>bash - experience.log</span>
+            </div>
+            <div className="flex-1"></div>
+          </div>
+          
+          <div className="p-6 md:p-10 font-mono text-sm sm:text-base leading-relaxed text-zinc-400">
+            {experiences.map((exp, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.2 }}
+                className="mb-8 relative pl-6 border-l-2 border-zinc-800 last:mb-0 pb-2"
+              >
+                <div className="absolute w-3 h-3 bg-white rounded-full -left-[7px] top-1.5 shadow-[0_0_10px_rgba(255,255,255,0.8)]"></div>
+                
+                <div className="text-zinc-500 text-xs mb-1 font-bold tracking-wider uppercase">[{exp.period}]</div>
+                <h3 className="text-xl font-bold text-white mb-1 glow-text">
+                  <span className="text-zinc-500 font-normal mr-2">@</span>{exp.company}
+                </h3>
+                <p className="text-xl font-bold text-zinc-300 mb-3">{exp.role}</p>
+                <p className="text-zinc-500 leading-relaxed text-sm">
+                  <span className="text-zinc-600 mr-2">$ log details:</span>
+                  {exp.description}
+                </p>
+              </motion.div>
+            ))}
+            <div className="flex items-center mt-8">
+              <span className="text-zinc-600 mr-2">darshan@portfolio:~$</span>
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+                className="inline-block w-2.5 h-5 bg-white align-middle shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+              ></motion.span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

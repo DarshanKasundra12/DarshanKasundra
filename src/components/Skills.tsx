@@ -1,121 +1,54 @@
-
 import { motion } from "framer-motion";
 import { 
-  Code2, 
-  Palette, 
-  Smartphone, 
-  Globe, 
-  Database, 
-  Zap,
-  GitBranch,
-  Monitor
+  Code2, Database, Zap, GitBranch, Monitor, Terminal, LayoutTemplate, Layers, Frame, Lock, Server, Smartphone
 } from "lucide-react";
 
 const Skills = () => {
   const skills = [
-  {
-    name: "Node.js",
-    icon: Code2,
-    description: "JavaScript runtime for scalable backend development",
-    color: "from-indigo-500 to-purple-500"
-  },
-  {
-    name: "React.js",
-    icon: Code2,
-    description: "Building modern, component-based web interfaces",
-    color: "from-blue-500 to-cyan-500"
-  },
-  {
-    name: "MongoDB",
-    icon: Database,
-    description: "NoSQL database for flexible, JSON-based data storage",
-    color: "from-green-500 to-emerald-500"
-  },
-  {
-    name: "PHP",
-    icon: Code2,
-    description: "Server-side scripting for web backend development",
-    color: "from-pink-500 to-purple-500"
-  },
-  {
-    name: "SQL",
-    icon: Database,
-    description: "Structured query language for relational databases",
-    color: "from-yellow-500 to-orange-500"
-  },
-  {
-    name: "Java",
-    icon: Code2,
-    description: "Strongly typed, object-oriented programming language",
-    color: "from-orange-500 to-red-500"
-  },
-  {
-    name: "Supabase",
-    icon: Database,
-    description: "Open-source Firebase alternative with Postgres & auth",
-    color: "from-teal-500 to-cyan-500"
-  },
-  {
-    name: "Git",
-    icon: GitBranch,
-    description: "Version control and collaborative development with Git",
-    color: "from-gray-500 to-slate-500"
-  },
-  {
-    name: "Docker",
-    icon: Monitor,
-    description: "Containerization for consistent development and deployment",
-    color: "from-blue-800 to-gray-900"
-  },
-  {
-    name: "Ethical Hacking",
-    icon: Zap,
-    description: "Security testing, vulnerability analysis, and penetration testing",
-    color: "from-red-500 to-black"
-  }
-];
-
-  
+    { name: "Node.js", icon: Server, code: "npm install express cors" },
+    { name: "React.js", icon: Code2, code: "npx create-react-app ." },
+    { name: "Next.js", icon: Layers, code: "npx create-next-app@latest" },
+    { name: "TypeScript", icon: Code2, code: "tsc --init" },
+    { name: "MongoDB", icon: Database, code: "db.collection.insertOne()" },
+    { name: "Express.js", icon: Server, code: "app.listen(3000, () => {})" },
+    { name: "Tailwind CSS", icon: LayoutTemplate, code: "npm install -D tailwindcss" },
+    { name: "PHP", icon: Code2, code: "<?php echo 'Hello'; ?>" },
+    { name: "SQL", icon: Database, code: "SELECT * FROM users;" },
+    { name: "Supabase", icon: Database, code: "supabase start" },
+    { name: "Git", icon: GitBranch, code: "git commit -m 'init'" },
+    { name: "Docker", icon: Monitor, code: "docker-compose up -d" },
+    { name: "Flutter", icon: Smartphone, code: "flutter run" },
+    { name: "Ethical Hacking", icon: Lock, code: "nmap -sS -v db" }
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+    hidden: { opacity: 0, scale: 0.95, y: 20 },
+    visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
   };
 
   return (
-    <section id="skills" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-20 bg-black relative">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#222_1px,transparent_1px),linear-gradient(to_bottom,#222_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_20%,transparent_100%)] opacity-20 pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 font-mono"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-            Skills & 
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Expertise</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
+            <span className="text-zinc-500">export const </span>
+            Skills
+            <span className="text-zinc-500"> = [</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors duration-300">
-            Technologies and tools I use to bring ideas to life
+          <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
+            // Technologies and tools I use to bring ideas to life
           </p>
         </motion.div>
 
@@ -124,35 +57,55 @@ const Skills = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
               variants={itemVariants}
-              whileHover={{ 
-                scale: 1.05,
-                transition: { duration: 0.2 }
-              }}
-              className="group relative p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600"
+              whileHover={{ y: -5, scale: 1.02, boxShadow: "0 0 30px rgba(255,255,255,0.1)" }}
+              className="rounded-xl border border-zinc-800 bg-[#0a0a0a] overflow-hidden flex flex-col group cursor-default"
             >
-              <div className="relative z-10">
-                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${skill.color} text-white mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <skill.icon size={24} />
+              <div className="flex items-center px-4 py-2 border-b border-zinc-800 bg-[#111]">
+                <div className="flex space-x-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-600"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-500"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-400"></div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
-                  {skill.name}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed transition-colors duration-300">
-                  {skill.description}
-                </p>
+                <div className="mx-auto flex items-center space-x-2 text-zinc-500 text-[10px] font-mono font-bold tracking-wider uppercase group-hover:text-zinc-300 transition-colors">
+                  <Terminal size={10} />
+                  <span>{skill.name.toLowerCase().replace(" ", "-")}.sh</span>
+                </div>
               </div>
-              
-              {/* Hover effect background */}
-              <div className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`} />
+              <div className="p-5 flex-grow flex flex-col items-start justify-center font-mono relative overflow-hidden">
+                <div className="absolute -right-4 -bottom-4 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-500 pointer-events-none">
+                  <skill.icon size={120} />
+                </div>
+                
+                <div className="flex items-center mb-3 text-white z-10 w-full">
+                  <div className="p-2 bg-[#111] border border-zinc-800 rounded shadow-md mr-4 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] group-hover:border-white transition-all duration-300">
+                    <skill.icon size={20} className="text-zinc-300 group-hover:text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold tracking-wide">{skill.name}</h3>
+                </div>
+                
+                <div className="text-xs text-zinc-400 bg-black border border-zinc-800 p-3 rounded w-full flex items-center overflow-x-auto whitespace-nowrap z-10 font-mono shadow-inner">
+                  <span className="text-zinc-600 mr-2">$</span>
+                  <span className="text-zinc-300 font-bold tracking-widest leading-none">{skill.code}</span>
+                  <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                    className="inline-block w-[6px] h-[14px] bg-white ml-2 align-middle shadow-[0_0_5px_rgba(255,255,255,0.8)]"
+                  />
+                </div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
+        
+        <div className="text-center mt-12 font-mono text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-500 tracking-tighter">
+          ];
+        </div>
       </div>
     </section>
   );
