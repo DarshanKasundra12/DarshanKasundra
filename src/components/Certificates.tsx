@@ -1,10 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Award, Calendar, Terminal } from "lucide-react";
+import { ExternalLink, Award, Calendar, Terminal, X, Search, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const Certificates = () => {
-  const [hoveredCert, setHoveredCert] = useState<number | null>(null);
+  const [activeCert, setActiveCert] = useState<number | null>(null);
 
   const certificates = [
     {
@@ -64,197 +64,153 @@ const Certificates = () => {
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.1 } }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
-  };
-
-  const activeCert = certificates.find(c => c.id === hoveredCert);
-
   return (
-    <section id="certificates" className="py-20 bg-black relative">
+    <section id="certificates" className="py-24 bg-black relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16 font-mono"
+          className="mb-20 font-mono"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
-            <span className="text-zinc-500">sudo get </span>
-            Certificates
-            <motion.span animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }} className="inline-block w-4 h-8 bg-white ml-2 align-middle"></motion.span>
+          <div className="flex items-center gap-4 text-zinc-500 text-sm mb-4">
+            <span className="px-2 py-0.5 border border-zinc-800 rounded bg-[#0a0a0a]">~/credentials</span>
+            <div className="h-[1px] flex-1 bg-zinc-900"></div>
+          </div>
+          <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tighter">
+            PROFESSIONAL <br />
+            <span className="text-zinc-500 uppercase">Certifications</span>
           </h2>
-          <p className="text-xl text-zinc-400 max-w-3xl mx-auto mt-4">
-            // Professional certifications and continuous learning achievements
-          </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
-        >
-          {certificates.map((cert) => (
-            <motion.div
-              key={cert.id}
-              variants={itemVariants}
-              whileHover={{ y: -5, boxShadow: "0 0 30px rgba(255,255,255,0.1)" }}
-              className="group relative rounded-xl border border-zinc-800 bg-[#0a0a0a] overflow-hidden flex flex-col transition-all duration-300 cursor-pointer"
-              onClick={() => setHoveredCert(cert.id)}
-            >
-              <div className="flex items-center px-4 py-2 border-b border-zinc-800 bg-[#111]">
-                <div className="flex space-x-1.5 flex-1">
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-600"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-500"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-400"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+          {certificates.map((cert) => {
+            const isPreviewing = activeCert === cert.id;
+            
+            return (
+              <motion.div
+                key={cert.id}
+                layout
+                className={`relative group rounded-xl border ${isPreviewing ? 'border-zinc-500 shadow-[0_0_50px_rgba(255,255,255,0.05)]' : 'border-zinc-800'} bg-[#050505] overflow-hidden flex flex-col transition-all duration-500`}
+                onClick={() => !isPreviewing && setActiveCert(cert.id)}
+              >
+                {/* Terminal Styled Header */}
+                <div className="flex items-center px-4 py-3 border-b border-zinc-900 bg-[#0a0a0a] justify-between">
+                  <div className="flex space-x-2">
+                    {isPreviewing ? (
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); setActiveCert(null); }}
+                        className="w-3 h-3 rounded-full bg-red-500 hover:scale-110 transition-transform"
+                      />
+                    ) : (
+                      <div className="w-3 h-3 rounded-full bg-zinc-800" />
+                    )}
+                    <div className="w-3 h-3 rounded-full bg-zinc-900" />
+                    <div className="w-3 h-3 rounded-full bg-zinc-900" />
+                  </div>
+                  <div className="text-zinc-600 text-[10px] font-mono font-bold tracking-widest uppercase flex items-center gap-2">
+                    {isPreviewing ? <Search size={10} /> : <FileText size={10} />}
+                    {cert.title.slice(0, 20)}...
+                  </div>
                 </div>
-                <div className="flex items-center text-zinc-500 text-[10px] font-mono font-bold tracking-wider">
-                  <Terminal size={10} className="mr-2" />
-                  <span>cert_{cert.id}.pdf</span>
-                </div>
-                <div className="flex-1 text-right text-zinc-600 text-[10px] uppercase font-bold tracking-widest hidden sm:block">
-                  [Click to preview]
-                </div>
-              </div>
 
-              <div className="relative overflow-hidden border-b border-zinc-800 bg-[#000]">
-                <motion.div
-                  className="w-full h-48 bg-zinc-900 border-b border-zinc-800 flex items-center justify-center relative overflow-hidden"
+                {/* Preview Content Area — "Only in that space" */}
+                <div 
+                  className={`relative overflow-hidden transition-all duration-500 ease-in-out ${isPreviewing ? 'h-[400px] sm:h-[500px]' : 'h-56'}`}
                 >
-                  <img src={cert.image} alt={cert.title} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="bg-black/80 px-4 py-2 rounded text-white font-mono text-sm border border-zinc-800">Preview .pdf</span>
-                  </div>
-                </motion.div>
-                
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-white text-black text-xs font-bold rounded-sm uppercase font-mono flex items-center gap-1 shadow-lg">
-                    <Award size={12} /> Certified
-                  </span>
+                  <AnimatePresence mode="wait">
+                    {isPreviewing ? (
+                      <motion.div
+                        key="preview"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="w-full h-full bg-[#030303] flex flex-col"
+                      >
+                        <div className="flex-1 overflow-hidden p-2 sm:p-4 flex items-center justify-center">
+                          {cert.image.toLowerCase().endsWith('.pdf') ? (
+                            <iframe
+                              src={cert.image}
+                              className="w-full h-full bg-white rounded-sm"
+                              style={{ border: 0 }}
+                            />
+                          ) : (
+                            <img
+                              src={cert.image}
+                              alt={cert.title}
+                              className="w-full h-full object-contain rounded-sm shadow-2xl"
+                            />
+                          )}
+                        </div>
+                        <div className="p-4 bg-[#0a0a0a] border-t border-zinc-900 flex justify-between items-center">
+                          <span className="text-zinc-500 text-[10px] uppercase font-mono tracking-widest">[Preview Mode]</span>
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="text-zinc-400 hover:text-white text-[10px] uppercase font-bold tracking-widest"
+                            onClick={(e) => { e.stopPropagation(); setActiveCert(null); }}
+                          >
+                            <X size={14} className="mr-2" /> Close
+                          </Button>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="thumbnail"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="w-full h-full group"
+                      >
+                        <img 
+                          src={cert.image} 
+                          alt={cert.title} 
+                          className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" 
+                        />
+                        <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-all duration-500 flex items-center justify-center">
+                          <span className="px-4 py-2 border border-zinc-700 bg-black/80 text-white font-mono text-xs uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-all duration-300">
+                            Expand Preview
+                          </span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-                
-                {cert.credentialUrl && (
-                  <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Button
-                      size="sm"
-                      className="bg-black text-white hover:bg-white hover:text-black border border-white font-mono uppercase text-xs font-bold"
-                      asChild
-                    >
-                      <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                        <ExternalLink size={16} className="mr-2" /> View
-                      </a>
-                    </Button>
-                  </div>
-                )}
-              </div>
-              
-              <div className="p-6 flex-grow flex flex-col font-mono">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-bold text-white group-hover:text-zinc-300 transition-colors duration-300 pr-4">
-                    {cert.title}
-                  </h3>
-                  <div className="flex items-center text-zinc-500 text-xs whitespace-nowrap">
-                    <Calendar size={12} className="mr-1" />
-                    {cert.date}
-                  </div>
-                </div>
-                
-                <p className="text-zinc-400 font-bold mb-3 uppercase text-xs tracking-wider">
-                  {cert.issuer}
-                </p>
-                <p className="text-zinc-500 mb-4 flex-grow text-sm">
-                  {cert.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2">
-                  {cert.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-2 py-1 bg-zinc-900 border border-zinc-700 text-zinc-400 text-[10px] uppercase font-bold rounded hover:bg-white hover:text-black transition-colors duration-200 cursor-default"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
 
-      {/* Enlarged image overlay when clicked */}
-      <AnimatePresence>
-        {activeCert && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
-            onClick={() => setHoveredCert(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.95 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.95 }}
-              className="relative max-w-4xl w-full max-h-[90vh] rounded-xl overflow-hidden shadow-[0_0_50px_rgba(255,255,255,0.1)] border border-zinc-800 bg-black flex flex-col"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Terminal Header for Modal */}
-              <div className="flex items-center px-4 py-3 border-b border-zinc-800 bg-[#111] shrink-0">
-                <div className="flex space-x-2">
-                  <button onClick={() => setHoveredCert(null)} className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors shadow-inner"></button>
-                  <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
-                  <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
-                </div>
-                <div className="flex-1 text-center text-zinc-400 text-xs font-mono font-bold tracking-widest uppercase">
-                  preview_{activeCert.id}.png
-                </div>
-                <div className="w-12 text-right">
-                  {activeCert.credentialUrl && (
-                    <a href={activeCert.credentialUrl} target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors inline-block">
-                      <ExternalLink size={16} />
-                    </a>
-                  )}
-                </div>
-              </div>
-              
-              <div className="flex-1 overflow-auto bg-[#0a0a0a] flex items-center justify-center p-4">
-                {activeCert.image && activeCert.image.toLowerCase().endsWith('.pdf') ? (
-                  <iframe
-                    src={activeCert.image}
-                    title={activeCert.title}
-                    className="w-full h-[70vh] bg-white rounded shadow-inner"
-                    style={{ border: 0 }}
-                  />
-                ) : (
-                  <img
-                    src={activeCert.image}
-                    alt={activeCert.title}
-                    className="max-w-full max-h-[70vh] w-auto h-auto object-contain rounded shadow-[0_0_30px_rgba(0,0,0,0.5)]"
-                  />
+                {/* Details Section */}
+                {!isPreviewing && (
+                  <div className="p-6 font-mono flex flex-col flex-grow bg-[#050505] border-t border-zinc-900/50">
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="text-lg font-bold text-white pr-4">
+                        {cert.title}
+                      </h3>
+                      <div className="flex items-center text-zinc-600 text-[10px] whitespace-nowrap pt-1">
+                        <Calendar size={10} className="mr-1" />
+                        {cert.date}
+                      </div>
+                    </div>
+                    
+                    <p className="text-[#4ade80] font-bold mb-3 uppercase text-[10px] tracking-widest">
+                      {cert.issuer}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-2 mt-auto pt-4">
+                      {cert.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-2 py-0.5 border border-zinc-800 text-zinc-500 text-[9px] uppercase font-bold rounded"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 )}
-              </div>
-              
-              <div className="shrink-0 border-t border-zinc-800 bg-[#111] p-4 text-center font-mono flex flex-col">
-                <h3 className="text-white text-lg font-bold glow-text">{activeCert.title}</h3>
-                <p className="text-zinc-500 text-sm uppercase tracking-wider font-bold">{activeCert.issuer}</p>
-                <div className="mt-2 text-zinc-600 text-xs tracking-widest">
-                  [Click outside or press Red button to close]
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 };

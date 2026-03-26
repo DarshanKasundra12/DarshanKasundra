@@ -11,7 +11,7 @@ const Navbar = ({ activeSection }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
 
   const navItems = [
-    { id: "hero", label: "Home", file: "index.tsx" },
+    { id: "home", label: "Home", file: "index.tsx" },
     { id: "skills", label: "Skills", file: "skills.json" },
     { id: "projects", label: "Projects", file: "projects.ts" },
     { id: "certificates", label: "Certificates", file: "certs.md" },
@@ -62,7 +62,7 @@ const Navbar = ({ activeSection }: NavbarProps) => {
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-3 font-bold cursor-pointer select-none group"
-            onClick={() => scrollToSection('hero')}
+            onClick={() => scrollToSection('home')}
           >
             <img 
               src="/logo.svg" 
