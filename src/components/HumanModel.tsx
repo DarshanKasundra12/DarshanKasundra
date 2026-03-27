@@ -1,11 +1,38 @@
 import { useRef, Suspense, useEffect, useState } from 'react';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
-import { OrbitControls, Stage, PerspectiveCamera, Environment, ContactShadows } from '@react-three/drei';
+import { OrbitControls, Stage, PerspectiveCamera, Environment, ContactShadows, Html, useProgress } from '@react-three/drei';
 // @ts-ignore
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 // @ts-ignore
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import * as THREE from 'three';
+import { motion } from 'framer-motion';
+
+const Loader = () => {
+  const { progress } = useProgress();
+  return (
+    <Html center>
+      <div className="flex flex-col items-center justify-center w-64">
+        <div className="w-full h-1 bg-zinc-900 rounded-full overflow-hidden mb-3 border border-zinc-800">
+          <motion.div 
+            className="h-full bg-[#4ade80] shadow-[0_0_10px_#4ade80]" 
+            initial={{ width: 0 }}
+            animate={{ width: `${progress}%` }}
+            transition={{ type: "spring", stiffness: 50, damping: 20 }}
+          />
+        </div>
+        <div className="flex flex-col items-center space-y-1">
+          <span className="text-zinc-500 font-mono text-[9px] uppercase tracking-[0.3em] animate-pulse">
+            Downloading Neural Mesh
+          </span>
+          <span className="text-[#4ade80] font-mono text-xs font-bold">
+            {progress.toFixed(0)}%
+          </span>
+        </div>
+      </div>
+    </Html>
+  );
+};
 
 const Model = () => {
   const meshRef = useRef<THREE.Group>(null);
@@ -60,7 +87,24 @@ const HumanModel = () => {
   }, []);
 
   return (
-    <div className="w-full h-[400px] sm:h-[500px] md:h-[650px] relative mt-10 lg:mt-0 overflow-visible">
+    <div className="w-full h-[400px] sm:h-[500px] md:h-[650px] relative mt-10 lg:mt-0 overflow-visible flex items-center justify-center">
+      {!isActive && (
+        <div className="flex flex-col items-center justify-center space-y-4">
+          <div className="relative">
+            <div className="w-12 h-12 border-2 border-zinc-800 border-t-[#4ade80] rounded-full animate-spin"></div>
+            <div className="absolute inset-0 bg-[#4ade80]/10 blur-xl rounded-full"></div>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-zinc-500 font-mono text-[10px] uppercase tracking-[0.4em]">
+              Protocol: INITIALIZING
+            </span>
+            <span className="text-zinc-600 font-mono text-[8px] uppercase tracking-[0.2em] mt-1">
+              Establishing 3D Neural Link...
+            </span>
+          </div>
+        </div>
+      )}
+
       {isActive && (
         <Canvas shadows dpr={[1, 1.5]} frameloop="always" className="overflow-visible">
           <PerspectiveCamera makeDefault position={[0, 1.5, 9]} fov={30} />
@@ -69,7 +113,7 @@ const HumanModel = () => {
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} castShadow />
           <pointLight position={[-10, -10, -10]} intensity={1} />
           
-          <Suspense fallback={null}>
+          <Suspense fallback={<Loader />}>
             <Stage 
               environment="city" 
               intensity={0.6} 
@@ -102,3 +146,4 @@ const HumanModel = () => {
 };
 
 export default HumanModel;
+
