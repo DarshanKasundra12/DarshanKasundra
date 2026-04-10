@@ -1,11 +1,16 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, MapPin, Send, MessageCircle, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import MagneticTilt from "./ui/MagneticTilt";
 
 const Contact = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
   const [message, setMessage] = useState("");
   const { toast } = useToast();
 
@@ -31,16 +36,17 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-black relative border-t border-zinc-900">
+    <section id="contact" ref={sectionRef} className="py-20 bg-transparent relative border-t border-slate-800/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
+          style={{ y: parallaxY }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16 font-mono"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
-            <span className="text-zinc-500">./</span>SayHello<span className="text-zinc-500">.sh</span>
+            <span className="text-cyan-300/70">./</span>SayHello<span className="text-cyan-300/70">.sh</span>
           </h2>
           <p className="text-xl text-zinc-400 max-w-3xl mx-auto mt-4">
             // Have a project in mind? Let's work together.
@@ -66,6 +72,7 @@ const Contact = () => {
 
             <div className="space-y-4 font-mono">
               {contactInfo.map((info, index) => (
+                <MagneticTilt key={info.label} className="rounded-xl">
                 <motion.a
                   key={info.label}
                   href={info.href}
@@ -74,9 +81,9 @@ const Contact = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 * index }}
                   whileHover={{ x: 5, backgroundColor: "#111" }}
-                  className="flex items-center gap-4 p-5 rounded-xl border border-zinc-800 bg-[#0a0a0a] transition-all duration-300 group"
+                  className="flex items-center gap-4 p-5 rounded-xl border border-slate-700/70 dev-glass transition-all duration-300 group"
                 >
-                  <div className="p-3 bg-black border border-zinc-800 rounded-lg text-white group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300">
+                  <div className="p-3 bg-[#080d15] border border-slate-700 rounded-lg text-white group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(59,226,255,0.4)] transition-all duration-300">
                     <info.icon size={20} />
                   </div>
                   <div>
@@ -84,20 +91,22 @@ const Contact = () => {
                     <p className="text-white glow-text">{info.value}</p>
                   </div>
                 </motion.a>
+                </MagneticTilt>
               ))}
             </div>
           </motion.div>
 
+          <MagneticTilt className="rounded-xl">
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="rounded-xl border border-zinc-800 bg-[#0a0a0a] shadow-[0_0_40px_rgba(255,255,255,0.05)] overflow-hidden"
+            className="rounded-xl border border-slate-700/70 dev-glass dev-card shadow-[0_0_40px_rgba(59,226,255,0.08)] overflow-hidden"
           >
-            <div className="flex items-center px-4 py-3 border-b border-zinc-800 bg-[#111]">
+            <div className="flex items-center px-4 py-3 border-b border-slate-700/70 bg-[#0f1520]">
               <div className="flex space-x-1.5 flex-1">
-                <div className="w-3 h-3 rounded-full bg-zinc-600"></div>
-                <div className="w-3 h-3 rounded-full bg-zinc-500"></div>
+                <div className="w-3 h-3 rounded-full bg-rose-400/60"></div>
+                <div className="w-3 h-3 rounded-full bg-amber-300/60"></div>
                 <div className="w-3 h-3 rounded-full bg-[#25D366]"></div>
               </div>
               <div className="flex items-center text-zinc-500 text-xs font-mono font-bold tracking-wider">
@@ -131,7 +140,7 @@ const Contact = () => {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       rows={5}
-                      className="w-full bg-black border border-zinc-800 focus:border-white focus:ring-0 resize-none text-white pl-10 pt-4 rounded transition-colors duration-300 font-mono shadow-inner"
+                      className="w-full bg-[#070b12] border border-slate-800 focus:border-cyan-300 focus:ring-0 resize-none text-white pl-10 pt-4 rounded transition-colors duration-300 font-mono shadow-inner"
                       placeholder="Type your message here..."
                     />
                   </div>
@@ -140,7 +149,7 @@ const Contact = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-white text-black hover:bg-zinc-200 uppercase font-bold tracking-wider rounded-none shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] cursor-pointer transition-all duration-300 border border-white"
+                  className="w-full bg-gradient-to-r from-cyan-300 to-lime-300 text-black hover:from-cyan-200 hover:to-lime-200 uppercase font-bold tracking-wider rounded-none shadow-[0_0_15px_rgba(59,226,255,0.4)] hover:shadow-[0_0_25px_rgba(59,226,255,0.6)] cursor-pointer transition-all duration-300 border border-cyan-100"
                 >
                   <Send size={18} className="mr-2" />
                   root@run: send
@@ -148,6 +157,7 @@ const Contact = () => {
               </form>
             </div>
           </motion.div>
+          </MagneticTilt>
         </div>
       </div>
     </section>

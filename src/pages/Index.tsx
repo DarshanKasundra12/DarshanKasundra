@@ -78,7 +78,11 @@ const Index = () => {
   return (
     <ThemeProvider>
       <div className="bg-[var(--black)] text-white selection:bg-[var(--green)] selection:text-black font-['Outfit'] relative">
+        <div className="ambient-orb orb-cyan" />
+        <div className="ambient-orb orb-lime" />
+        <div className="ambient-orb orb-amber" />
         <div className="noise-overlay" />
+        <div className="scanline-overlay" />
         <ScrollProgressBar />
         
         {/* Cinematic Framer Motion Intro: Zoom-into-D */}
@@ -149,13 +153,13 @@ const Index = () => {
                 transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
                 className="relative z-10"
               >
-                <div id="home"><Hero /></div>
-                <div id="skills"><Skills /></div>
-                <div id="projects"><Projects /></div>
-                <div id="certificates"><Certificates /></div>
-                <div id="experience"><Experience /></div>
-                <div id="about"><About /></div>
-                <div id="contact"><Contact /></div>
+                <motion.div id="home" className="reveal-up" transition={{ delay: 0.05 }}><Hero /></motion.div>
+                <motion.div id="skills" className="reveal-up" transition={{ delay: 0.1 }}><Skills /></motion.div>
+                <motion.div id="projects" className="reveal-up" transition={{ delay: 0.15 }}><Projects /></motion.div>
+                <motion.div id="certificates" className="reveal-up" transition={{ delay: 0.2 }}><Certificates /></motion.div>
+                <motion.div id="experience" className="reveal-up" transition={{ delay: 0.25 }}><Experience /></motion.div>
+                <motion.div id="about" className="reveal-up" transition={{ delay: 0.3 }}><About /></motion.div>
+                <motion.div id="contact" className="reveal-up" transition={{ delay: 0.35 }}><Contact /></motion.div>
                 
                 <Footer />
               </motion.div>

@@ -1,5 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Terminal } from "lucide-react";
+import { useRef } from "react";
+import MagneticTilt from "./ui/MagneticTilt";
 
 const experiences = [
   {
@@ -23,29 +25,35 @@ const experiences = [
 ];
 
 const Experience = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [42, -42]);
+
   return (
-    <section id="experience" className="py-20 bg-black relative">
+    <section id="experience" ref={sectionRef} className="py-20 bg-transparent relative">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
+          style={{ y: parallaxY }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16 font-mono"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
-            <span className="text-zinc-500">cat </span>experience.log
+            <span className="text-cyan-300/70">cat </span>experience.log
           </h2>
           <p className="text-xl text-zinc-400 max-w-3xl mx-auto mt-4">
             // My professional work and internship journey
           </p>
         </motion.div>
         
-        <div className="relative rounded-xl border border-zinc-800 bg-[#0a0a0a] shadow-[0_0_30px_rgba(255,255,255,0.05)] overflow-hidden">
-          <div className="flex items-center px-4 py-3 border-b border-zinc-800 bg-[#111]">
+        <MagneticTilt className="rounded-xl">
+        <div className="relative rounded-xl border border-slate-700/70 dev-glass dev-card shadow-[0_0_30px_rgba(59,226,255,0.08)] overflow-hidden">
+          <div className="flex items-center px-4 py-3 border-b border-slate-700/70 bg-[#0f1520]">
             <div className="flex space-x-1.5 flex-1">
-              <div className="w-3 h-3 rounded-full bg-zinc-600"></div>
-              <div className="w-3 h-3 rounded-full bg-zinc-500"></div>
-              <div className="w-3 h-3 rounded-full bg-zinc-400"></div>
+              <div className="w-3 h-3 rounded-full bg-rose-400/60"></div>
+              <div className="w-3 h-3 rounded-full bg-amber-300/60"></div>
+              <div className="w-3 h-3 rounded-full bg-cyan-300/60"></div>
             </div>
             <div className="flex items-center text-zinc-500 text-xs font-mono font-bold tracking-wider">
               <Terminal size={12} className="mr-2" />
@@ -62,9 +70,9 @@ const Experience = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.2 }}
-                className="mb-8 relative pl-6 border-l-2 border-zinc-800 last:mb-0 pb-2"
+                className="mb-8 relative pl-6 border-l-2 border-slate-700 last:mb-0 pb-2"
               >
-                <div className="absolute w-3 h-3 bg-white rounded-full -left-[7px] top-1.5 shadow-[0_0_10px_rgba(255,255,255,0.8)]"></div>
+                <div className="absolute w-3 h-3 bg-cyan-300 rounded-full -left-[7px] top-1.5 shadow-[0_0_12px_rgba(59,226,255,0.8)]"></div>
                 
                 <div className="text-zinc-500 text-xs mb-1 font-bold tracking-wider uppercase">[{exp.period}]</div>
                 <h3 className="text-xl font-bold text-white mb-1 glow-text">
@@ -87,6 +95,7 @@ const Experience = () => {
             </div>
           </div>
         </div>
+        </MagneticTilt>
       </div>
     </section>
   );
