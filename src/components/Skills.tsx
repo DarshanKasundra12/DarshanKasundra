@@ -1,9 +1,15 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { 
   Code2, Database, Zap, GitBranch, Monitor, Terminal, LayoutTemplate, Layers, Frame, Lock, Server, Smartphone
 } from "lucide-react";
+import { useRef } from "react";
+import MagneticTilt from "./ui/MagneticTilt";
 
 const Skills = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
   const skills = [
     { name: "Node.js", icon: Server, code: "npm install express cors" },
     { name: "React.js", icon: Code2, code: "npx create-react-app ." },
@@ -32,11 +38,12 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-20 bg-black relative">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#222_1px,transparent_1px),linear-gradient(to_bottom,#222_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_20%,transparent_100%)] opacity-20 pointer-events-none" />
+    <section id="skills" ref={sectionRef} className="py-20 bg-transparent relative">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1a2230_1px,transparent_1px),linear-gradient(to_bottom,#1a2230_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_20%,transparent_100%)] opacity-20 pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
+          style={{ y: parallaxY }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -45,7 +52,7 @@ const Skills = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
             <span className="text-zinc-500">export const </span>
             Skills
-            <span className="text-zinc-500"> = [</span>
+            <span className="text-cyan-300/70"> = [</span>
           </h2>
           <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
             // Technologies and tools I use to bring ideas to life
@@ -59,20 +66,23 @@ const Skills = () => {
           viewport={{ once: true }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {skills.map((skill, index) => (
-            <motion.div
+          {skills.map((skill) => (
+            <MagneticTilt
               key={skill.name}
-              variants={itemVariants}
-              whileHover={{ y: -5, scale: 1.02, boxShadow: "0 0 30px rgba(255,255,255,0.1)" }}
-              className="rounded-xl border border-zinc-800 bg-[#0a0a0a] overflow-hidden flex flex-col group cursor-default"
+              className="rounded-xl"
             >
-              <div className="flex items-center px-4 py-2 border-b border-zinc-800 bg-[#111]">
+              <motion.div
+                variants={itemVariants}
+                whileHover={{ y: -5, scale: 1.02, boxShadow: "0 0 30px rgba(255,255,255,0.1)" }}
+                className="rounded-xl border border-slate-700/70 dev-glass dev-card overflow-hidden flex flex-col group cursor-default"
+              >
+              <div className="flex items-center px-4 py-2 border-b border-slate-700/70 bg-[#0f1520]">
                 <div className="flex space-x-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-600"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-500"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-400"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-rose-400/60"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-300/60"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-cyan-300/60"></div>
                 </div>
-                <div className="mx-auto flex items-center space-x-2 text-zinc-500 text-[10px] font-mono font-bold tracking-wider uppercase group-hover:text-zinc-300 transition-colors">
+                <div className="mx-auto flex items-center space-x-2 text-zinc-500 text-[10px] font-mono font-bold tracking-wider uppercase group-hover:text-cyan-200 transition-colors">
                   <Terminal size={10} />
                   <span>{skill.name.toLowerCase().replace(" ", "-")}.sh</span>
                 </div>
@@ -83,23 +93,24 @@ const Skills = () => {
                 </div>
                 
                 <div className="flex items-center mb-3 text-white z-10 w-full">
-                  <div className="p-2 bg-[#111] border border-zinc-800 rounded shadow-md mr-4 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] group-hover:border-white transition-all duration-300">
-                    <skill.icon size={20} className="text-zinc-300 group-hover:text-white" />
+                  <div className="p-2 bg-[#111927] border border-slate-700 rounded shadow-md mr-4 group-hover:shadow-[0_0_15px_rgba(59,226,255,0.45)] group-hover:border-cyan-300 transition-all duration-300">
+                    <skill.icon size={20} className="text-zinc-300 group-hover:text-cyan-200" />
                   </div>
                   <h3 className="text-lg font-bold tracking-wide">{skill.name}</h3>
                 </div>
                 
-                <div className="text-xs text-zinc-400 bg-black border border-zinc-800 p-3 rounded w-full flex items-center overflow-x-auto whitespace-nowrap z-10 font-mono shadow-inner">
+                <div className="text-xs text-zinc-400 bg-[#070b12] border border-slate-800 p-3 rounded w-full flex items-center overflow-x-auto whitespace-nowrap z-10 font-mono shadow-inner">
                   <span className="text-zinc-600 mr-2">$</span>
                   <span className="text-zinc-300 font-bold tracking-widest leading-none">{skill.code}</span>
                   <motion.span
                     animate={{ opacity: [1, 0] }}
                     transition={{ duration: 0.8, repeat: Infinity }}
-                    className="inline-block w-[6px] h-[14px] bg-white ml-2 align-middle shadow-[0_0_5px_rgba(255,255,255,0.8)]"
+                    className="inline-block w-[6px] h-[14px] bg-cyan-300 ml-2 align-middle shadow-[0_0_10px_rgba(59,226,255,0.85)]"
                   />
                 </div>
               </div>
-            </motion.div>
+              </motion.div>
+            </MagneticTilt>
           ))}
         </motion.div>
         

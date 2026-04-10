@@ -1,9 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Award, Calendar, Terminal, X, Search, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useScroll, useTransform } from "framer-motion";
+import MagneticTilt from "./ui/MagneticTilt";
 
 const Certificates = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [46, -46]);
+
   const [activeCert, setActiveCert] = useState<number | null>(null);
 
   const certificates = [
@@ -65,21 +71,22 @@ const Certificates = () => {
   ];
 
   return (
-    <section id="certificates" className="py-24 bg-black relative">
+    <section id="certificates" ref={sectionRef} className="py-24 bg-transparent relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
+          style={{ y: parallaxY }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mb-20 font-mono"
         >
           <div className="flex items-center gap-4 text-zinc-500 text-sm mb-4">
-            <span className="px-2 py-0.5 border border-zinc-800 rounded bg-[#0a0a0a]">~/credentials</span>
+            <span className="px-2 py-0.5 border border-slate-700 rounded bg-[#0a0f17]">~/credentials</span>
             <div className="h-[1px] flex-1 bg-zinc-900"></div>
           </div>
           <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tighter">
             PROFESSIONAL <br />
-            <span className="text-zinc-500 uppercase">Certifications</span>
+            <span className="section-title-accent uppercase">Certifications</span>
           </h2>
         </motion.div>
 
@@ -88,14 +95,15 @@ const Certificates = () => {
             const isPreviewing = activeCert === cert.id;
             
             return (
+              <MagneticTilt key={cert.id} className="rounded-xl">
               <motion.div
                 key={cert.id}
                 layout
-                className={`relative group rounded-xl border ${isPreviewing ? 'border-zinc-500 shadow-[0_0_50px_rgba(255,255,255,0.05)]' : 'border-zinc-800'} bg-[#050505] overflow-hidden flex flex-col transition-all duration-500`}
+                className={`relative group rounded-xl border ${isPreviewing ? 'border-cyan-300/70 shadow-[0_0_50px_rgba(59,226,255,0.15)]' : 'border-slate-700/70'} dev-glass dev-card overflow-hidden flex flex-col transition-all duration-500`}
                 onClick={() => !isPreviewing && setActiveCert(cert.id)}
               >
                 {/* Terminal Styled Header */}
-                <div className="flex items-center px-4 py-3 border-b border-zinc-900 bg-[#0a0a0a] justify-between">
+                <div className="flex items-center px-4 py-3 border-b border-slate-700/70 bg-[#0f1520] justify-between">
                   <div className="flex space-x-2">
                     {isPreviewing ? (
                       <button 
@@ -103,10 +111,10 @@ const Certificates = () => {
                         className="w-3 h-3 rounded-full bg-red-500 hover:scale-110 transition-transform"
                       />
                     ) : (
-                      <div className="w-3 h-3 rounded-full bg-zinc-800" />
+                      <div className="w-3 h-3 rounded-full bg-rose-400/60" />
                     )}
-                    <div className="w-3 h-3 rounded-full bg-zinc-900" />
-                    <div className="w-3 h-3 rounded-full bg-zinc-900" />
+                    <div className="w-3 h-3 rounded-full bg-amber-300/60" />
+                    <div className="w-3 h-3 rounded-full bg-cyan-300/60" />
                   </div>
                   <div className="text-zinc-600 text-[10px] font-mono font-bold tracking-widest uppercase flex items-center gap-2">
                     {isPreviewing ? <Search size={10} /> : <FileText size={10} />}
@@ -207,6 +215,7 @@ const Certificates = () => {
                   </div>
                 )}
               </motion.div>
+              </MagneticTilt>
             );
           })}
         </div>

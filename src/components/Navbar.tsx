@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronRight } from "lucide-react";
+import ThemeVariantSwitch from "./ThemeVariantSwitch";
 
 interface NavbarProps {
   activeSection: string;
@@ -50,7 +51,7 @@ const Navbar = ({ activeSection }: NavbarProps) => {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-mono ${
         scrolled
-          ? "bg-[#0a0a0a]/90 backdrop-blur-md shadow-lg border-b border-zinc-900"
+          ? "dev-glass shadow-[0_8px_32px_rgba(0,0,0,0.45)] border-b border-slate-800/60"
           : "bg-transparent"
       }`}
     >
@@ -67,7 +68,7 @@ const Navbar = ({ activeSection }: NavbarProps) => {
             <img 
               src="/logo.svg" 
               alt="Darshan Kasundra Logo" 
-              className="h-24 w-auto drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.7)] transition-all duration-300"
+              className="h-24 w-auto drop-shadow-[0_0_12px_rgba(59,226,255,0.35)] group-hover:drop-shadow-[0_0_30px_rgba(59,226,255,0.75)] transition-all duration-300"
             />
             {/* <span className="text-white font-mono font-bold tracking-wider text-sm hidden sm:inline">
               Darshan<span className="text-zinc-500">.dev</span>
@@ -84,18 +85,18 @@ const Navbar = ({ activeSection }: NavbarProps) => {
                   onClick={() => scrollToSection(item.id)}
                   className={`group relative px-4 py-2 flex items-center justify-center gap-2 text-xs font-bold tracking-wider uppercase transition-colors duration-200 border-x border-t rounded-t-lg mx-[1px] ${
                     isActive
-                      ? "bg-[#111] border-zinc-800 text-white shadow-[0_-5px_20px_rgba(255,255,255,0.05)] z-10"
-                      : "bg-[#050505] border-transparent text-zinc-500 hover:bg-[#0a0a0a] hover:text-zinc-300 z-0"
+                      ? "bg-[#0f1720] border-slate-700/70 text-white shadow-[0_-5px_24px_rgba(59,226,255,0.15)] z-10"
+                      : "bg-[#05070d] border-transparent text-zinc-500 hover:bg-[#0c1119] hover:text-zinc-200 z-0"
                   }`}
                 >
-                  <span className={`${isActive ? 'text-zinc-400' : 'text-zinc-600'}`}>{item.file.split('.')[1]}</span>
+                  <span className={`${isActive ? 'text-cyan-300/80' : 'text-zinc-600'}`}>.{item.file.split('.')[1]}</span>
                   {item.label}
                   
                   {/* Subtle active line indicator at top of tab */}
                   {isActive && (
                     <motion.div
                       layoutId="tab-indicator"
-                      className="absolute top-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)] rounded-t-lg"
+                      className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-300 via-lime-300 to-amber-300 shadow-[0_0_16px_rgba(59,226,255,0.8)] rounded-t-lg"
                       initial={false}
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
                     />
@@ -111,12 +112,17 @@ const Navbar = ({ activeSection }: NavbarProps) => {
 
           {/* Mobile menu button */}
           <div className="lg:hidden flex items-center space-x-2">
+            <ThemeVariantSwitch />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 border border-zinc-800 rounded bg-[#111] text-zinc-400 hover:text-white transition-colors duration-200"
+              className="p-2 border border-slate-700 rounded bg-[#0d131d] text-zinc-300 hover:text-cyan-300 transition-colors duration-200"
             >
               {isOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
+          </div>
+
+          <div className="hidden lg:flex items-center pl-3">
+            <ThemeVariantSwitch />
           </div>
         </div>
 
@@ -128,10 +134,10 @@ const Navbar = ({ activeSection }: NavbarProps) => {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden overflow-hidden bg-[#0a0a0a] border border-zinc-800 rounded-lg mt-2 shadow-2xl absolute left-4 right-4 z-50 origin-top"
+              className="lg:hidden overflow-hidden dev-glass border border-slate-700/70 rounded-lg mt-2 shadow-2xl absolute left-4 right-4 z-50 origin-top"
             >
               <div className="p-2 space-y-1">
-                <div className="px-3 py-2 text-[10px] text-zinc-600 uppercase font-bold tracking-widest border-b border-zinc-900 mb-2 select-none">
+                <div className="px-3 py-2 text-[10px] text-zinc-500 uppercase font-bold tracking-widest border-b border-slate-800/70 mb-2 select-none">
                   Explorer: Portfolio
                 </div>
                 {navItems.map((item) => {
@@ -142,12 +148,12 @@ const Navbar = ({ activeSection }: NavbarProps) => {
                       onClick={() => scrollToSection(item.id)}
                       className={`w-full text-left flex items-center px-3 py-2 rounded text-xs tracking-wider transition-colors duration-200 ${
                         isActive
-                          ? "bg-[#1a1a1a] text-white border-l-2 border-white"
-                          : "text-zinc-400 hover:bg-[#111] hover:text-zinc-200 border-l-2 border-transparent"
+                          ? "bg-[#111927] text-white border-l-2 border-cyan-300"
+                          : "text-zinc-400 hover:bg-[#0f1520] hover:text-zinc-200 border-l-2 border-transparent"
                       }`}
                     >
-                      <ChevronRight size={14} className={`mr-2 transition-transform ${isActive ? "rotate-90 text-white" : "text-zinc-600"}`} />
-                      <span className={`mr-2 ${isActive ? 'text-zinc-300' : 'text-zinc-600'}`}>{item.file.split('.')[1]}</span>
+                      <ChevronRight size={14} className={`mr-2 transition-transform ${isActive ? "rotate-90 text-cyan-300" : "text-zinc-600"}`} />
+                      <span className={`mr-2 ${isActive ? 'text-cyan-300/80' : 'text-zinc-600'}`}>.{item.file.split('.')[1]}</span>
                       {item.file}
                     </button>
                   );
