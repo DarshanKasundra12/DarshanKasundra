@@ -30,14 +30,14 @@ const Hero = () => {
 
 
   return (
-    <section id="home" className="min-h-screen pt-32 pb-20 relative overflow-hidden bg-transparent selection:bg-zinc-800 selection:text-white">
+    <section id="home" className="min-h-screen pt-24 md:pt-28 lg:pt-24 pb-10 lg:pb-12 relative overflow-hidden bg-transparent selection:bg-zinc-800 selection:text-white">
       {/* Background Grid Accent */}
       <div 
         className="absolute inset-0 bg-[linear-gradient(to_right,#1a2230_1px,transparent_1px),linear-gradient(to_bottom,#1a2230_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] opacity-30 pointer-events-none"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-center">
           {/* Left Column: Terminal & Bio */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -56,7 +56,7 @@ const Hero = () => {
                 System Protocol: ACTIVE
               </motion.div>
               
-              <h1 className="text-5xl sm:text-7xl font-black text-white leading-none tracking-tighter">
+              <h1 className="text-4xl sm:text-6xl xl:text-7xl font-black text-white leading-none tracking-tighter">
                 DARSHAN <br />
                 <span className="section-title-accent">KASUNDRA</span>
               </h1>
@@ -69,7 +69,7 @@ const Hero = () => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="text-2xl sm:text-3xl font-mono text-cyan-300 font-bold glow-text"
+                      className="text-xl sm:text-2xl lg:text-3xl font-mono text-cyan-300 font-bold glow-text"
                     >
                       &gt; {roleText[role]}
                     </motion.div>
@@ -150,12 +150,12 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, delay: 0.5 }}
-            className="relative lg:h-[600px] flex items-center justify-center order-first lg:order-last mb-10 lg:mb-0"
+            className="relative lg:h-[min(68vh,560px)] flex items-center justify-center order-first lg:order-last mb-8 lg:mb-0"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-300/20 to-transparent blur-3xl rounded-full scale-75 -z-10"></div>
             
             {/* The 3D container is scaled for mobile and large screens */}
-            <div className="w-full max-w-[280px] sm:max-w-sm lg:max-w-[500px]">
+            <div className="w-full max-w-[260px] sm:max-w-[320px] lg:max-w-[460px]">
               <HumanModel />
             </div>
           </motion.div>
