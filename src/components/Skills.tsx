@@ -19,6 +19,7 @@ const Skills = () => {
     { name: "Express.js", icon: Server, code: "app.listen(3000, () => {})" },
     { name: "Tailwind CSS", icon: LayoutTemplate, code: "npm install -D tailwindcss" },
     { name: "PHP", icon: Code2, code: "<?php echo 'Hello'; ?>" },
+    { name: "Laravel", icon: Code2, code: "php artisan serve" },
     { name: "SQL", icon: Database, code: "SELECT * FROM users;" },
     { name: "Supabase", icon: Database, code: "supabase start" },
     { name: "Git", icon: GitBranch, code: "git commit -m 'init'" },
