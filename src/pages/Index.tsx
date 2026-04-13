@@ -24,8 +24,11 @@ const Index = () => {
   const [introPhase, setIntroPhase] = useState<"NAME" | "ZOOM" | "COMPLETE">("NAME");
 
   useEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+
     // Force scroll to top on refresh
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     
     // Prevent scrolling during intro
     document.body.style.overflow = "hidden";
@@ -39,6 +42,7 @@ const Index = () => {
     const completeTimer = setTimeout(() => {
       setIntroPhase("COMPLETE");
       setActiveSection("home");
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
       // Re-enable scrolling after intro
       document.body.style.overflow = "auto";
     }, 3200);
@@ -47,6 +51,7 @@ const Index = () => {
       clearTimeout(zoomTimer);
       clearTimeout(completeTimer);
       document.body.style.overflow = "auto";
+      window.history.scrollRestoration = previousScrollRestoration;
     };
   }, []);
 
