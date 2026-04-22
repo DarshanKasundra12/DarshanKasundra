@@ -17,7 +17,7 @@ A modern, responsive, and SEO-friendly portfolio website built with React, TypeS
 
 ## 🖥️ Demo
 
-[Live Portfolio Demo](https://your-portfolio-url.com/)
+[Live Portfolio Demo](https://darshankasundra12.vercel.app/)
 
 ## 🛠️ Tech Stack
 
