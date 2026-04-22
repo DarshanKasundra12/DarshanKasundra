@@ -1,6 +1,6 @@
 # Skill Sync Folio
 
-![Portfolio Banner](public/Project%20Image/Portfolio-Image.png)
+
 
 A modern, responsive, and SEO-friendly portfolio website built with React, TypeScript, Tailwind CSS, and Framer Motion. Showcase your skills, projects, certificates, and professional journey in style.
 
@@ -18,12 +18,6 @@ A modern, responsive, and SEO-friendly portfolio website built with React, TypeS
 ## 🖥️ Demo
 
 [Live Portfolio Demo](https://your-portfolio-url.com/)
-
-## 📸 Screenshots
-
-| Home | Certificates 
-|------|--------------|
-| ![](public/Project%20Image/Portfolio-Image.png) | ![](public/Java-Hackerrank.png) |
 
 ## 🛠️ Tech Stack
 
