@@ -94,11 +94,13 @@ const About = () => {
 
               <div className="mt-8 pl-6">
                 <Button
-                  onClick={() => window.open("/resume.pdf", "_blank")}
+                  asChild
                   size="lg"
                   className="bg-gradient-to-r from-cyan-300 to-lime-300 text-black hover:from-cyan-200 hover:to-lime-200 border border-cyan-100 font-mono uppercase text-xs font-bold tracking-wider rounded-none shadow-[0_0_15px_rgba(59,226,255,0.4)] hover:shadow-[0_0_25px_rgba(59,226,255,0.6)] transition-all duration-300"
                 >
-                  <Download size={16} className="mr-2" /> Download Resume
+                  <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" download="Darshan_Kasundra_Resume.pdf">
+                    <Download size={16} className="mr-2" /> Download Resume
+                  </a>
                 </Button>
               </div>
             </div>
