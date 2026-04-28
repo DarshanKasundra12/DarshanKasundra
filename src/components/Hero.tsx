@@ -6,7 +6,7 @@ import HumanModel from "./HumanModel";
 import MagneticTilt from "./ui/MagneticTilt";
 
 const roleText = [
-  "Advanced Web Dev",
+  "MERN Stack Developer",
   "Full Stack Engineer",
   "UI/UX Designer",
   "Cloud Architect",
@@ -124,11 +124,13 @@ const Hero = () => {
                 
                 <div className="flex flex-wrap gap-4 mt-8">
                   <Button
-                    onClick={() => window.open("/resume.pdf", "_blank")}
+                    asChild
                     size="lg"
                     className="bg-gradient-to-r from-cyan-300 to-lime-300 text-black hover:from-cyan-200 hover:to-lime-200 px-6 py-2 text-xs font-bold tracking-wider uppercase rounded-none border border-cyan-200 transition-all duration-300 shadow-[0_0_18px_rgba(59,226,255,0.35)]"
                   >
-                    Resume.pdf
+                    <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" download="Darshan_Kasundra_Resume.pdf">
+                      Resume.pdf
+                    </a>
                   </Button>
                   
                   <div className="flex space-x-4">
