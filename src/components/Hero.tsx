@@ -7,11 +7,11 @@ import MagneticTilt from "./ui/MagneticTilt";
 const HumanModel = lazy(() => import("./HumanModel"));
 
 const roleText = [
-  "MERN Stack Developer",
-  "Full Stack Engineer",
-  "UI/UX Designer",
-  "Cloud Architect",
-  "Cybersecurity Enthusiast"
+  "Full-Stack MERN Developer",
+  "Software Engineer Intern @ Theta",
+  "Real-Time Systems & Socket.IO",
+  "High-Throughput Backend Engineer",
+  "Next.js 14 & Cloud Architect"
 ];
 
 interface HeroProps {
@@ -96,7 +96,7 @@ const Hero = ({ isIntroComplete = true }: HeroProps) => {
                   </div>
                 </div>
 
-                <div className="p-6 font-mono text-sm sm:text-base space-y-4 max-h-[400px] overflow-auto custom-scrollbar">
+                <div className="p-6 font-mono text-sm sm:text-base space-y-3.5 max-h-[400px] overflow-auto custom-scrollbar">
                   <div className="flex items-start space-x-3">
                     <span className="text-zinc-600 shrink-0">01</span>
                     <p className="text-zinc-400"><span className="text-cyan-300">const</span> profile = {'{'}</p>
@@ -107,23 +107,27 @@ const Hero = ({ isIntroComplete = true }: HeroProps) => {
                   </div>
                   <div className="flex items-start space-x-3 ml-4">
                     <span className="text-zinc-600 shrink-0">03</span>
-                    <p className="text-zinc-300">role: <span className="text-zinc-500">"Full Stack Web Developer"</span>,</p>
+                    <p className="text-zinc-300">role: <span className="text-zinc-500">"Full-Stack MERN Developer (4 Internships)"</span>,</p>
                   </div>
                   <div className="flex items-start space-x-3 ml-4">
                     <span className="text-zinc-600 shrink-0">04</span>
-                    <p className="text-zinc-300">location: <span className="text-zinc-500">"Gujarat, India"</span>,</p>
+                    <p className="text-zinc-300">current: <span className="text-lime-300">"Frontend Dev @ Theta Technolabs"</span>,</p>
                   </div>
                   <div className="flex items-start space-x-3 ml-4">
                     <span className="text-zinc-600 shrink-0">05</span>
-                    <p className="text-zinc-300">education: <span className="text-zinc-500">"Computer Information Technology"</span></p>
+                    <p className="text-zinc-300">education: <span className="text-zinc-500">"B.Tech IT @ CSPIT, CHARUSAT (CGPA 7.26)"</span>,</p>
                   </div>
-                  <div className="flex items-start space-x-3">
+                  <div className="flex items-start space-x-3 ml-4">
                     <span className="text-zinc-600 shrink-0">06</span>
-                    <p className="text-zinc-400">{'}'};</p>
+                    <p className="text-zinc-300">stack: [<span className="text-cyan-300">"Node"</span>, <span className="text-cyan-300">"React"</span>, <span className="text-cyan-300">"Next 14"</span>, <span className="text-cyan-300">"Redis"</span>, <span className="text-cyan-300">"Socket.IO"</span>, <span className="text-cyan-300">"Docker"</span>]</p>
                   </div>
                   <div className="flex items-start space-x-3">
                     <span className="text-zinc-600 shrink-0">07</span>
-                    <p className="text-zinc-500 mt-2">// Pursuing Software Engineering, focused on MERN & Cloud.</p>
+                    <p className="text-zinc-400">{'}'};</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <span className="text-zinc-600 shrink-0">08</span>
+                    <p className="text-zinc-500 text-xs sm:text-sm mt-1">// Built 30+ REST APIs, real-time systems & 4.7x throughput scaling.</p>
                   </div>
                   
                   <div className="flex flex-wrap gap-4 mt-8">

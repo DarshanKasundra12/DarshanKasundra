@@ -39,10 +39,10 @@ const Footer = () => {
             <div className="p-6">
               <h3 className="text-xl font-bold text-white tracking-tight mb-2">
                 <span className="text-cyan-300/70 mr-2">{"//"}</span>
-                From keyboard strokes to polished interactions
+                From keyboard strokes to high-throughput platforms
               </h3>
               <p className="text-zinc-500 text-sm">
-                I code with precision and play with teamwork
+                Full-Stack MERN Developer • 4 Internships • Real-Time Systems & Distributed APIs
               </p>
 
               <div className="flex justify-center space-x-4 mt-6">
