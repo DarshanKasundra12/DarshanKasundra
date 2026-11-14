@@ -20,18 +20,7 @@ const experiences: ExperienceItem[] = [
       "Developed an internal Encryption & Decryption Tool for securely handling sensitive payloads with server-side secret-key storage and automated cryptographic workflows.",
       "Built a centralized Login Gateway for company servers, enabling secure authentication and streamlined access to multiple internal projects through a unified entry point."
     ],
-    tech: ["Node.js", "React", "Cryptography", "JWT", "Stock Market UI", "Gateways"]
-  },
-  {
-    company: "Theta Technolabs",
-    role: "Software Developer Intern",
-    period: "Jul 2026 - Present",
-    points: [
-      "Developed an internal Encryption & Decryption Tool for securely handling sensitive payloads with server-side secret-key storage and automated cryptographic workflows.",
-      "Built a centralized Login Gateway for company servers, enabling secure authentication and streamlined access to multiple internal projects through a unified entry point.",
-      "Contributing as a Frontend Developer on a client-facing Stock Market platform, creating responsive, interactive UI components and integrating backend market feeds."
-    ],
-    tech: ["Node.js", "React", "Cryptography", "JWT", "Stock Market UI", "Gateways"]
+    tech: ["Node.js", "Express.js", "Cryptography", "JWT", "Security Gateways", "REST APIs"]
   },
   {
     company: "Digimonk Solutions",

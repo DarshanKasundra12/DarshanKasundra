@@ -94,7 +94,7 @@ const About = () => {
                 <div className="flex"><span className="text-zinc-700 select-none mr-4">6</span><span /></div>
                 <div className="flex">
                   <span className="text-zinc-700 select-none mr-4">7</span>
-                  <span>Currently contributing as a Frontend Developer on a client-facing <strong className="text-cyan-300">Stock Market platform</strong> at Theta Technolabs, developing responsive, interactive user interfaces with real-time financial market integration.</span>
+                  <span>Currently contributing as a <strong className="text-cyan-300">Software Developer Intern at Theta Technolabs</strong>, engineering secure internal encryption/decryption systems, server-side cryptographic workflows, and centralized authentication gateways.</span>
                 </div>
                 <div className="flex"><span className="text-zinc-700 select-none mr-4">8</span><span /></div>
                 
