@@ -7,25 +7,32 @@ interface NavbarProps {
   activeSection: string;
 }
 
+const navItems = [
+  { id: "home", label: "Home", file: "index.tsx" },
+  { id: "skills", label: "Skills", file: "skills.json" },
+  { id: "projects", label: "Projects", file: "projects.ts" },
+  { id: "certificates", label: "Certificates", file: "certs.md" },
+  { id: "experience", label: "Experience", file: "history.log" },
+  { id: "about", label: "About", file: "whoami.sh" },
+  { id: "contact", label: "Contact", file: "ping.exe" },
+];
+
 const Navbar = ({ activeSection }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const navItems = [
-    { id: "home", label: "Home", file: "index.tsx" },
-    { id: "skills", label: "Skills", file: "skills.json" },
-    { id: "projects", label: "Projects", file: "projects.ts" },
-    { id: "certificates", label: "Certificates", file: "certs.md" },
-    { id: "experience", label: "Experience", file: "history.log" },
-    { id: "about", label: "About", file: "whoami.sh" },
-    { id: "contact", label: "Contact", file: "ping.exe" },
-  ];
-
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 30);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -58,21 +65,19 @@ const Navbar = ({ activeSection }: NavbarProps) => {
       <div className="max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
           
-          {/* Logo / Prompt */}
+          {/* Logo */}
           <motion.div
-            whileHover={{ scale: 1.08 }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-3 font-bold cursor-pointer select-none group"
             onClick={() => scrollToSection('home')}
+            aria-label="Darshan Kasundra Home"
           >
             <img 
               src="/logo.svg" 
               alt="Darshan Kasundra Logo" 
               className="h-24 w-auto drop-shadow-[0_0_12px_rgba(59,226,255,0.35)] group-hover:drop-shadow-[0_0_30px_rgba(59,226,255,0.75)] transition-all duration-300"
             />
-            {/* <span className="text-white font-mono font-bold tracking-wider text-sm hidden sm:inline">
-              Darshan<span className="text-zinc-500">.dev</span>
-            </span> */}
           </motion.div>
 
           {/* Desktop IDE Tabs Navigation */}
@@ -92,7 +97,7 @@ const Navbar = ({ activeSection }: NavbarProps) => {
                   <span className={`${isActive ? 'text-cyan-300/80' : 'text-zinc-600'}`}>.{item.file.split('.')[1]}</span>
                   {item.label}
                   
-                  {/* Subtle active line indicator at top of tab */}
+                  {/* Active line indicator at top of tab */}
                   {isActive && (
                     <motion.div
                       layoutId="tab-indicator"
@@ -115,6 +120,7 @@ const Navbar = ({ activeSection }: NavbarProps) => {
             <ThemeVariantSwitch />
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
               className="p-2 border border-slate-700 rounded bg-[#0d131d] text-zinc-300 hover:text-cyan-300 transition-colors duration-200"
             >
               {isOpen ? <X size={18} /> : <Menu size={18} />}

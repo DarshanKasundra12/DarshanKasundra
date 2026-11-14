@@ -3,15 +3,14 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Heart, GitBranch, TerminalSquare, Command } from "lucide-react";
 import MagneticTilt from "./ui/MagneticTilt";
 
+const socialLinks = [
+  { name: "GitHub", icon: Github, href: "https://github.com/DarshanKasundra12" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/darshan-kasundra12/" },
+  { name: "Email", icon: Mail, href: "mailto:darshankasundra0@gmail.com" },
+];
+
 const Footer = () => {
   const footerRef = useRef<HTMLElement | null>(null);
-  
-
-  const socialLinks = [
-    { name: "GitHub", icon: Github, href: "https://github.com/DarshanKasundra12" },
-    { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/darshan-kasundra12/" },
-    { name: "Email", icon: Mail, href: "mailto:darshankasundra0@gmail.com" },
-  ];
 
   return (
     <footer ref={footerRef} className="bg-transparent text-white relative border-t border-slate-800/70 pb-4 pt-10 overflow-hidden">
@@ -40,30 +39,30 @@ const Footer = () => {
             <div className="p-6">
               <h3 className="text-xl font-bold text-white tracking-tight mb-2">
                 <span className="text-cyan-300/70 mr-2">{"//"}</span>
-                From keyboard strokes to polished interactions
+                From keyboard strokes to high-throughput platforms
               </h3>
               <p className="text-zinc-500 text-sm">
-                I code with precision and play with teamwork
+                Full-Stack MERN Developer • 4 Internships • Real-Time Systems & Distributed APIs
               </p>
 
               <div className="flex justify-center space-x-4 mt-6">
                 {socialLinks.map((link, index) => (
                   <MagneticTilt key={link.name} maxTilt={10} maxOffset={10}>
-                  <motion.a
-                    key={link.name}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ scale: 1.1, backgroundColor: "#3be2ff", color: "#000" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-2 px-4 py-2 bg-[#080d15] border border-slate-700 rounded-md text-zinc-300 transition-colors duration-300"
-                  >
-                    <link.icon size={16} />
-                    <span className="text-xs uppercase font-bold tracking-wider">{link.name}</span>
-                  </motion.a>
+                    <motion.a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ scale: 1.1, backgroundColor: "#3be2ff", color: "#000" }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label={link.name}
+                      className="flex items-center gap-2 px-4 py-2 bg-[#080d15] border border-slate-700 rounded-md text-zinc-300 transition-colors duration-300"
+                    >
+                      <link.icon size={16} />
+                      <span className="text-xs uppercase font-bold tracking-wider">{link.name}</span>
+                    </motion.a>
                   </MagneticTilt>
                 ))}
               </div>
@@ -80,7 +79,7 @@ const Footer = () => {
             
             <div className="flex items-center text-zinc-400">
               <Command size={12} className="mr-1" />
-              <span>2025 Darshan Kasundra</span>
+              <span>{new Date().getFullYear()} Darshan Kasundra</span>
             </div>
 
             <div className="flex items-center space-x-1">

@@ -1,5 +1,4 @@
-import { useMemo, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface MagneticTiltProps {
@@ -9,6 +8,8 @@ interface MagneticTiltProps {
   maxOffset?: number;
 }
 
+const springConfig = { stiffness: 240, damping: 22, mass: 0.5 };
+
 const MagneticTilt = ({
   children,
   className,
@@ -16,12 +17,16 @@ const MagneticTilt = ({
   maxOffset = 14,
 }: MagneticTiltProps) => {
   const reduceMotion = useReducedMotion();
-  const [state, setState] = useState({ rotateX: 0, rotateY: 0, x: 0, y: 0 });
 
-  const spring = useMemo(
-    () => ({ type: "spring", stiffness: 240, damping: 22, mass: 0.5 }),
-    []
-  );
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
+  const springRotateX = useSpring(rotateX, springConfig);
+  const springRotateY = useSpring(rotateY, springConfig);
 
   if (reduceMotion) {
     return <div className={className}>{children}</div>;
@@ -32,16 +37,17 @@ const MagneticTilt = ({
     const px = (event.clientX - rect.left) / rect.width;
     const py = (event.clientY - rect.top) / rect.height;
 
-    const rotateY = (px - 0.5) * maxTilt * 2;
-    const rotateX = (0.5 - py) * maxTilt * 2;
-    const x = (px - 0.5) * maxOffset;
-    const y = (py - 0.5) * maxOffset;
-
-    setState({ rotateX, rotateY, x, y });
+    rotateY.set((px - 0.5) * maxTilt * 2);
+    rotateX.set((0.5 - py) * maxTilt * 2);
+    x.set((px - 0.5) * maxOffset);
+    y.set((py - 0.5) * maxOffset);
   };
 
   const onMouseLeave = () => {
-    setState({ rotateX: 0, rotateY: 0, x: 0, y: 0 });
+    x.set(0);
+    y.set(0);
+    rotateX.set(0);
+    rotateY.set(0);
   };
 
   return (
@@ -49,14 +55,13 @@ const MagneticTilt = ({
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className={cn("transform-gpu", className)}
-      style={{ perspective: 900 }}
-      animate={{
-        x: state.x,
-        y: state.y,
-        rotateX: state.rotateX,
-        rotateY: state.rotateY,
+      style={{
+        perspective: 900,
+        x: springX,
+        y: springY,
+        rotateX: springRotateX,
+        rotateY: springRotateY,
       }}
-      transition={spring}
     >
       {children}
     </motion.div>
