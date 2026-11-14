@@ -68,8 +68,8 @@ const Skills = () => {
             Skills
             <span className="text-cyan-300/70"> = [</span>
           </h2>
-          <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
-            // Full-stack technologies, databases, real-time protocols & devops
+          <p className="text-base sm:text-lg text-zinc-400 max-w-3xl mx-auto font-mono">
+            // Tested under stress: scalable backends, real-time event loops, and bulletproof database architectures
           </p>
         </motion.div>
 

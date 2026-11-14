@@ -87,6 +87,9 @@ const Certificates = () => {
             PROFESSIONAL <br />
             <span className="section-title-accent uppercase">Certifications</span>
           </h2>
+          <p className="text-base sm:text-lg text-zinc-400 max-w-3xl font-mono mt-4">
+            // Continuous learning backed by proof: 11+ industry credentials across Cloud, Security, OS, and Data architectures
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">

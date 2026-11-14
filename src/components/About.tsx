@@ -48,8 +48,8 @@ const About = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
             <span className="text-cyan-300/70">whoami | </span>AboutMe
           </h2>
-          <p className="text-xl text-zinc-400 max-w-3xl mx-auto mt-4">
-            // Full-stack engineering, performance scaling, and verified results
+          <p className="text-base sm:text-lg text-zinc-400 max-w-3xl mx-auto mt-4 font-mono">
+            // Driven by craft & measurable impact: writing code that stays stable under stress and delivers real value
           </p>
         </motion.div>
 
@@ -92,6 +92,11 @@ const About = () => {
                 <p>
                   Currently contributing as a <strong className="text-cyan-300">Software Developer Intern at Theta Technolabs</strong>, engineering secure internal encryption/decryption systems, server-side cryptographic workflows, and centralized authentication gateways.
                 </p>
+
+                <div className="p-3 bg-[#080d15] border-l-2 border-cyan-400 rounded-r-lg text-xs text-zinc-300 font-mono">
+                  <span className="text-cyan-400 font-bold">&gt; Philosophy: </span>
+                  <span className="italic">"Good software works. Great software scales under load, stays secure, and simplifies lives."</span>
+                </div>
                 
                 {/* Education sub-block */}
                 <div className="mt-4 pt-4 border-t border-slate-800/80">

@@ -75,8 +75,8 @@ const Experience = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
             <span className="text-cyan-300/70">cat </span>experience.log
           </h2>
-          <p className="text-xl text-zinc-400 max-w-3xl mx-auto mt-4">
-            // 4 software engineering internships & production-grade deliverables
+          <p className="text-base sm:text-lg text-zinc-400 max-w-3xl mx-auto mt-4 font-mono">
+            // 4 software engineering internships: shipping secure gateways, optimizing high-load routes, and writing resilient code
           </p>
         </motion.div>
         
