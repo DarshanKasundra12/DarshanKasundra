@@ -127,8 +127,8 @@ const Contact = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
             <span className="text-cyan-300/70">./</span>SayHello<span className="text-cyan-300/70">.sh</span>
           </h2>
-          <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
-            // Choose your protocol: Direct Browser Email (Gmail / Outlook), System Mail, or WhatsApp
+          <p className="text-base sm:text-lg text-zinc-400 max-w-3xl mx-auto font-mono">
+            // Have an ambitious project or a high-impact engineering role? Let&apos;s build something exceptional together.
           </p>
         </motion.div>
 

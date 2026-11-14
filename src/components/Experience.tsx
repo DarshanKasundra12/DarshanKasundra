@@ -20,18 +20,7 @@ const experiences: ExperienceItem[] = [
       "Developed an internal Encryption & Decryption Tool for securely handling sensitive payloads with server-side secret-key storage and automated cryptographic workflows.",
       "Built a centralized Login Gateway for company servers, enabling secure authentication and streamlined access to multiple internal projects through a unified entry point."
     ],
-    tech: ["Node.js", "React", "Cryptography", "JWT", "Stock Market UI", "Gateways"]
-  },
-  {
-    company: "Theta Technolabs",
-    role: "Software Developer Intern",
-    period: "Jul 2026 - Present",
-    points: [
-      "Developed an internal Encryption & Decryption Tool for securely handling sensitive payloads with server-side secret-key storage and automated cryptographic workflows.",
-      "Built a centralized Login Gateway for company servers, enabling secure authentication and streamlined access to multiple internal projects through a unified entry point.",
-      "Contributing as a Frontend Developer on a client-facing Stock Market platform, creating responsive, interactive UI components and integrating backend market feeds."
-    ],
-    tech: ["Node.js", "React", "Cryptography", "JWT", "Stock Market UI", "Gateways"]
+    tech: ["Node.js", "Express.js", "Cryptography", "JWT", "Security Gateways", "REST APIs"]
   },
   {
     company: "Digimonk Solutions",
@@ -86,8 +75,8 @@ const Experience = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
             <span className="text-cyan-300/70">cat </span>experience.log
           </h2>
-          <p className="text-xl text-zinc-400 max-w-3xl mx-auto mt-4">
-            // 4 software engineering internships & production-grade deliverables
+          <p className="text-base sm:text-lg text-zinc-400 max-w-3xl mx-auto mt-4 font-mono">
+            // 4 software engineering internships: shipping secure gateways, optimizing high-load routes, and writing resilient code
           </p>
         </motion.div>
         

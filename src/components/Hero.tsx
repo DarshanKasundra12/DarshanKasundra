@@ -80,6 +80,10 @@ const Hero = ({ isIntroComplete = true }: HeroProps) => {
                   )}
                 </AnimatePresence>
               </div>
+
+              <p className="text-zinc-400 text-sm sm:text-base font-mono max-w-xl leading-relaxed pt-1">
+                // Engineering resilient architectures, high-throughput APIs, and real-time systems that perform under load.
+              </p>
             </div>
 
             {/* Terminal Window Overlay */}

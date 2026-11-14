@@ -169,8 +169,8 @@ const Projects = () => {
             <span className="text-cyan-300/70">&lt;</span>FeaturedProjects{" "}
             <span className="text-cyan-300/70">/&gt;</span>
           </h2>
-          <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
-            // Full-stack engineering, high-throughput APIs & real-time architectures
+          <p className="text-base sm:text-lg text-zinc-400 max-w-3xl mx-auto font-mono">
+            // Real products built for real users — from commercial token systems to doctor-validated healthcare platforms
           </p>
         </motion.div>
 

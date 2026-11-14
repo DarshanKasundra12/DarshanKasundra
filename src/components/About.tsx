@@ -48,8 +48,8 @@ const About = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tighter">
             <span className="text-cyan-300/70">whoami | </span>AboutMe
           </h2>
-          <p className="text-xl text-zinc-400 max-w-3xl mx-auto mt-4">
-            // Full-stack engineering, performance scaling, and verified results
+          <p className="text-base sm:text-lg text-zinc-400 max-w-3xl mx-auto mt-4 font-mono">
+            // Driven by craft & measurable impact: writing code that stays stable under stress and delivers real value
           </p>
         </motion.div>
 
@@ -76,27 +76,27 @@ const About = () => {
                 <div className="flex-1" />
               </div>
               
-              <div className="p-6 md:p-8 font-mono text-sm leading-relaxed text-zinc-400 flex-1 flex flex-col justify-center">
-                <div className="flex">
-                  <span className="text-zinc-700 select-none mr-4">1</span>
-                  <span><span className="text-white font-bold text-base sm:text-lg"># Darshan Kasundra — Full-Stack MERN Developer</span></span>
+              <div className="p-6 md:p-8 font-mono text-sm leading-relaxed text-zinc-400 flex-1 flex flex-col justify-center space-y-4">
+                <div>
+                  <h3 className="text-white font-bold text-base sm:text-lg"># Darshan Kasundra — Full-Stack MERN Developer</h3>
                 </div>
-                <div className="flex"><span className="text-zinc-700 select-none mr-4">2</span><span /></div>
-                <div className="flex">
-                  <span className="text-zinc-700 select-none mr-4">3</span>
-                  <span>Full-Stack MERN Developer with <strong className="text-white">4 industry internships</strong> and <strong className="text-white">2+ production-grade projects</strong>. Built 30+ RESTful APIs, designed real-time Socket.IO systems, and deployed scalable applications on Vercel, Render, and Railway.</span>
+                
+                <p>
+                  Full-Stack MERN Developer with <strong className="text-white">4 industry internships</strong> and <strong className="text-white">2+ production-grade projects</strong>. Built 30+ RESTful APIs, designed real-time Socket.IO systems, and deployed scalable applications on Vercel, Render, and Railway.
+                </p>
+                
+                <p>
+                  Proficient in Node.js, Express.js, React, Next.js 14, MongoDB, MySQL, and TypeScript. Experienced in JWT authentication, cryptographic encryption/decryption workflows, centralized authentication gateways, Prisma ORM, Redis caching, worker threads, and third-party API integrations.
+                </p>
+                
+                <p>
+                  Currently contributing as a <strong className="text-cyan-300">Software Developer Intern at Theta Technolabs</strong>, engineering secure internal encryption/decryption systems, server-side cryptographic workflows, and centralized authentication gateways.
+                </p>
+
+                <div className="p-3 bg-[#080d15] border-l-2 border-cyan-400 rounded-r-lg text-xs text-zinc-300 font-mono">
+                  <span className="text-cyan-400 font-bold">&gt; Philosophy: </span>
+                  <span className="italic">"Good software works. Great software scales under load, stays secure, and simplifies lives."</span>
                 </div>
-                <div className="flex"><span className="text-zinc-700 select-none mr-4">4</span><span /></div>
-                <div className="flex">
-                  <span className="text-zinc-700 select-none mr-4">5</span>
-                  <span>Proficient in Node.js, Express.js, React, Next.js 14, MongoDB, MySQL, and TypeScript. Experienced in JWT authentication, cryptographic encryption/decryption workflows, centralized authentication gateways, Prisma ORM, Redis caching, worker threads, and third-party API integrations.</span>
-                </div>
-                <div className="flex"><span className="text-zinc-700 select-none mr-4">6</span><span /></div>
-                <div className="flex">
-                  <span className="text-zinc-700 select-none mr-4">7</span>
-                  <span>Currently contributing as a Frontend Developer on a client-facing <strong className="text-cyan-300">Stock Market platform</strong> at Theta Technolabs, developing responsive, interactive user interfaces with real-time financial market integration.</span>
-                </div>
-                <div className="flex"><span className="text-zinc-700 select-none mr-4">8</span><span /></div>
                 
                 {/* Education sub-block */}
                 <div className="mt-4 pt-4 border-t border-slate-800/80">
