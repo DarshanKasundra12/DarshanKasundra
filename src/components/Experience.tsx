@@ -48,53 +48,49 @@ const Experience = () => {
         </motion.div>
         
         <MagneticTilt className="rounded-xl">
-        <div className="relative rounded-xl border border-slate-700/70 dev-glass dev-card shadow-[0_0_30px_rgba(59,226,255,0.08)] overflow-hidden">
-          <div className="flex items-center px-4 py-3 border-b border-slate-700/70 bg-[#0f1520]">
-            <div className="flex space-x-1.5 flex-1">
-              <div className="w-3 h-3 rounded-full bg-rose-400/60"></div>
-              <div className="w-3 h-3 rounded-full bg-amber-300/60"></div>
-              <div className="w-3 h-3 rounded-full bg-cyan-300/60"></div>
+          <div className="relative rounded-xl border border-slate-700/70 dev-glass dev-card shadow-[0_0_30px_rgba(59,226,255,0.08)] overflow-hidden">
+            <div className="flex items-center px-4 py-3 border-b border-slate-700/70 bg-[#0f1520]">
+              <div className="flex space-x-1.5 flex-1">
+                <div className="w-3 h-3 rounded-full bg-rose-400/60"></div>
+                <div className="w-3 h-3 rounded-full bg-amber-300/60"></div>
+                <div className="w-3 h-3 rounded-full bg-cyan-300/60"></div>
+              </div>
+              <div className="flex items-center text-zinc-500 text-xs font-mono font-bold tracking-wider">
+                <Terminal size={12} className="mr-2" />
+                <span>bash - experience.log</span>
+              </div>
+              <div className="flex-1"></div>
             </div>
-            <div className="flex items-center text-zinc-500 text-xs font-mono font-bold tracking-wider">
-              <Terminal size={12} className="mr-2" />
-              <span>bash - experience.log</span>
-            </div>
-            <div className="flex-1"></div>
-          </div>
-          
-          <div className="p-6 md:p-10 font-mono text-sm sm:text-base leading-relaxed text-zinc-400">
-            {experiences.map((exp, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.2 }}
-                className="mb-8 relative pl-6 border-l-2 border-slate-700 last:mb-0 pb-2"
-              >
-                <div className="absolute w-3 h-3 bg-cyan-300 rounded-full -left-[7px] top-1.5 shadow-[0_0_12px_rgba(59,226,255,0.8)]"></div>
-                
-                <div className="text-zinc-500 text-xs mb-1 font-bold tracking-wider uppercase">[{exp.period}]</div>
-                <h3 className="text-xl font-bold text-white mb-1 glow-text">
-                  <span className="text-zinc-500 font-normal mr-2">@</span>{exp.company}
-                </h3>
-                <p className="text-xl font-bold text-zinc-300 mb-3">{exp.role}</p>
-                <p className="text-zinc-500 leading-relaxed text-sm">
-                  <span className="text-zinc-600 mr-2">$ log details:</span>
-                  {exp.description}
-                </p>
-              </motion.div>
-            ))}
-            <div className="flex items-center mt-8">
-              <span className="text-zinc-600 mr-2">darshan@portfolio:~$</span>
-              <motion.span
-                animate={{ opacity: [1, 0] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-                className="inline-block w-2.5 h-5 bg-white align-middle shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-              ></motion.span>
+            
+            <div className="p-6 md:p-10 font-mono text-sm sm:text-base leading-relaxed text-zinc-400">
+              {experiences.map((exp, idx) => (
+                <motion.div
+                  key={exp.company}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.15 }}
+                  className="mb-8 relative pl-6 border-l-2 border-slate-700 last:mb-0 pb-2"
+                >
+                  <div className="absolute w-3 h-3 bg-cyan-300 rounded-full -left-[7px] top-1.5 shadow-[0_0_12px_rgba(59,226,255,0.8)]"></div>
+                  
+                  <div className="text-zinc-500 text-xs mb-1 font-bold tracking-wider uppercase">[{exp.period}]</div>
+                  <h3 className="text-xl font-bold text-white mb-1 glow-text">
+                    <span className="text-zinc-500 font-normal mr-2">@</span>{exp.company}
+                  </h3>
+                  <p className="text-xl font-bold text-zinc-300 mb-3">{exp.role}</p>
+                  <p className="text-zinc-500 leading-relaxed text-sm">
+                    <span className="text-zinc-600 mr-2">$ log details:</span>
+                    {exp.description}
+                  </p>
+                </motion.div>
+              ))}
+              <div className="flex items-center mt-8">
+                <span className="text-zinc-600 mr-2">darshan@portfolio:~$</span>
+                <span className="inline-block w-2.5 h-5 bg-white align-middle animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
+              </div>
             </div>
           </div>
-        </div>
         </MagneticTilt>
       </div>
     </section>

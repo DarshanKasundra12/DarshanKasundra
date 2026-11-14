@@ -1,10 +1,8 @@
 import { Component, ReactNode, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-// @ts-ignore
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-// @ts-ignore
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import * as THREE from 'three';
 import { Button } from '@/components/ui/button';
 
@@ -44,7 +42,7 @@ const Model = ({ onLoaded }: { onLoaded: () => void }) => {
   const mtl = useLoader(MTLLoader, MODEL_ASSETS.mtl);
   
   // Load OBJ and apply materials
-  const obj = useLoader(OBJLoader, MODEL_ASSETS.obj, (loader: any) => {
+  const obj = useLoader(OBJLoader, MODEL_ASSETS.obj, (loader: OBJLoader) => {
     mtl.preload();
     loader.setMaterials(mtl);
   });
@@ -80,20 +78,9 @@ const CanvasStabilizer = () => {
   const { camera, size, invalidate } = useThree();
 
   useEffect(() => {
-    const syncFrame = () => {
-      camera.aspect = size.width / Math.max(size.height, 1);
-      camera.updateProjectionMatrix();
-      invalidate();
-      window.dispatchEvent(new Event('resize'));
-    };
-
-    const raf = requestAnimationFrame(syncFrame);
-    const delayed = window.setTimeout(syncFrame, 1700);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.clearTimeout(delayed);
-    };
+    camera.aspect = size.width / Math.max(size.height, 1);
+    camera.updateProjectionMatrix();
+    invalidate();
   }, [camera, size.width, size.height, invalidate]);
 
   return null;

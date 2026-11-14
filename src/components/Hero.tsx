@@ -1,9 +1,10 @@
-import { Terminal as TerminalIcon, ShieldCheck, Zap, Code2, Coffee, Command, Cpu, Globe, Rocket, Monitor, Github, Linkedin, Mail, ArrowDown } from "lucide-react";
+import { Github, Linkedin, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import HumanModel from "./HumanModel";
 import MagneticTilt from "./ui/MagneticTilt";
+
+const HumanModel = lazy(() => import("./HumanModel"));
 
 const roleText = [
   "MERN Stack Developer",
@@ -13,7 +14,11 @@ const roleText = [
   "Cybersecurity Enthusiast"
 ];
 
-const Hero = () => {
+interface HeroProps {
+  isIntroComplete?: boolean;
+}
+
+const Hero = ({ isIntroComplete = true }: HeroProps) => {
   const [role, setRole] = useState(0);
   const [roleFade, setRoleFade] = useState(true);
 
@@ -27,7 +32,6 @@ const Hero = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-
 
   return (
     <section id="home" className="min-h-screen pt-24 md:pt-28 lg:pt-24 pb-10 lg:pb-12 relative overflow-hidden bg-transparent selection:bg-zinc-800 selection:text-white">
@@ -78,76 +82,76 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Terminal Window Overlay (Skeleton Aesthetic) */}
+            {/* Terminal Window Overlay */}
             <MagneticTilt className="w-full max-w-2xl rounded-xl">
-            <div className="w-full max-w-2xl rounded-xl border border-slate-700/70 dev-glass dev-card overflow-hidden shadow-2xl relative">
-              <div className="flex items-center px-4 py-3 border-b border-slate-700/70 bg-[#0d131d]/80">
-                <div className="flex space-x-2 mr-4">
-                  <div className="w-3 h-3 rounded-full bg-rose-400/50 border border-rose-400/25"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-300/60 border border-amber-300/25"></div>
-                  <div className="w-3 h-3 rounded-full bg-cyan-300/60 border border-cyan-300/30"></div>
+              <div className="w-full max-w-2xl rounded-xl border border-slate-700/70 dev-glass dev-card overflow-hidden shadow-2xl relative">
+                <div className="flex items-center px-4 py-3 border-b border-slate-700/70 bg-[#0d131d]/80">
+                  <div className="flex space-x-2 mr-4">
+                    <div className="w-3 h-3 rounded-full bg-rose-400/50 border border-rose-400/25"></div>
+                    <div className="w-3 h-3 rounded-full bg-amber-300/60 border border-amber-300/25"></div>
+                    <div className="w-3 h-3 rounded-full bg-cyan-300/60 border border-cyan-300/30"></div>
+                  </div>
+                  <div className="flex-1 text-center text-zinc-400 text-xs font-mono tracking-widest uppercase">
+                    bio.sh — 128x64
+                  </div>
                 </div>
-                <div className="flex-1 text-center text-zinc-400 text-xs font-mono tracking-widest uppercase">
-                  bio.sh — 128x64
-                </div>
-              </div>
 
-              <div className="p-6 font-mono text-sm sm:text-base space-y-4 max-h-[400px] overflow-auto custom-scrollbar">
-                <div className="flex items-start space-x-3">
-                  <span className="text-zinc-600 shrink-0">01</span>
-                  <p className="text-zinc-400"><span className="text-cyan-300">const</span> profile = {'{'}</p>
-                </div>
-                <div className="flex items-start space-x-3 ml-4">
-                  <span className="text-zinc-600 shrink-0">02</span>
-                  <p className="text-zinc-300">name: <span className="text-zinc-500">"Darshan Kasundra"</span>,</p>
-                </div>
-                <div className="flex items-start space-x-3 ml-4">
-                  <span className="text-zinc-600 shrink-0">03</span>
-                  <p className="text-zinc-300">role: <span className="text-zinc-500">"Full Stack Web Developer"</span>,</p>
-                </div>
-                <div className="flex items-start space-x-3 ml-4">
-                  <span className="text-zinc-600 shrink-0">04</span>
-                  <p className="text-zinc-300">location: <span className="text-zinc-500">"Gujarat, India"</span>,</p>
-                </div>
-                <div className="flex items-start space-x-3 ml-4">
-                  <span className="text-zinc-600 shrink-0">05</span>
-                  <p className="text-zinc-300">education: <span className="text-zinc-500">"Computer Information Technology"</span></p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <span className="text-zinc-600 shrink-0">06</span>
-                  <p className="text-zinc-400">{'}'};</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <span className="text-zinc-600 shrink-0">07</span>
-                  <p className="text-zinc-500 mt-2">// Pursuing Software Engineering, focused on MERN & Cloud.</p>
-                </div>
-                
-                <div className="flex flex-wrap gap-4 mt-8">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="bg-gradient-to-r from-cyan-300 to-lime-300 text-black hover:from-cyan-200 hover:to-lime-200 px-6 py-2 text-xs font-bold tracking-wider uppercase rounded-none border border-cyan-200 transition-all duration-300 shadow-[0_0_18px_rgba(59,226,255,0.35)]"
-                  >
-                    <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" download="Darshan_Kasundra_Resume.pdf">
-                      Resume.pdf
-                    </a>
-                  </Button>
+                <div className="p-6 font-mono text-sm sm:text-base space-y-4 max-h-[400px] overflow-auto custom-scrollbar">
+                  <div className="flex items-start space-x-3">
+                    <span className="text-zinc-600 shrink-0">01</span>
+                    <p className="text-zinc-400"><span className="text-cyan-300">const</span> profile = {'{'}</p>
+                  </div>
+                  <div className="flex items-start space-x-3 ml-4">
+                    <span className="text-zinc-600 shrink-0">02</span>
+                    <p className="text-zinc-300">name: <span className="text-zinc-500">"Darshan Kasundra"</span>,</p>
+                  </div>
+                  <div className="flex items-start space-x-3 ml-4">
+                    <span className="text-zinc-600 shrink-0">03</span>
+                    <p className="text-zinc-300">role: <span className="text-zinc-500">"Full Stack Web Developer"</span>,</p>
+                  </div>
+                  <div className="flex items-start space-x-3 ml-4">
+                    <span className="text-zinc-600 shrink-0">04</span>
+                    <p className="text-zinc-300">location: <span className="text-zinc-500">"Gujarat, India"</span>,</p>
+                  </div>
+                  <div className="flex items-start space-x-3 ml-4">
+                    <span className="text-zinc-600 shrink-0">05</span>
+                    <p className="text-zinc-300">education: <span className="text-zinc-500">"Computer Information Technology"</span></p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <span className="text-zinc-600 shrink-0">06</span>
+                    <p className="text-zinc-400">{'}'};</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <span className="text-zinc-600 shrink-0">07</span>
+                    <p className="text-zinc-500 mt-2">// Pursuing Software Engineering, focused on MERN & Cloud.</p>
+                  </div>
                   
-                  <div className="flex space-x-4">
-                    <MagneticTilt maxTilt={12} maxOffset={10}>
-                      <a href="https://github.com/DarshanKasundra12" className="block p-2 border border-slate-700 rounded bg-[#0a0f17] hover:bg-cyan-300 hover:text-black transition-colors"><Github size={18} /></a>
-                    </MagneticTilt>
-                    <MagneticTilt maxTilt={12} maxOffset={10}>
-                      <a href="https://www.linkedin.com/in/darshan-kasundra12/" className="block p-2 border border-slate-700 rounded bg-[#0a0f17] hover:bg-cyan-300 hover:text-black transition-colors"><Linkedin size={18} /></a>
-                    </MagneticTilt>
+                  <div className="flex flex-wrap gap-4 mt-8">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="bg-gradient-to-r from-cyan-300 to-lime-300 text-black hover:from-cyan-200 hover:to-lime-200 px-6 py-2 text-xs font-bold tracking-wider uppercase rounded-none border border-cyan-200 transition-all duration-300 shadow-[0_0_18px_rgba(59,226,255,0.35)]"
+                    >
+                      <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" download="Darshan_Kasundra_Resume.pdf">
+                        Resume.pdf
+                      </a>
+                    </Button>
+                    
+                    <div className="flex space-x-4">
+                      <MagneticTilt maxTilt={12} maxOffset={10}>
+                        <a href="https://github.com/DarshanKasundra12" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" className="block p-2 border border-slate-700 rounded bg-[#0a0f17] hover:bg-cyan-300 hover:text-black transition-colors"><Github size={18} /></a>
+                      </MagneticTilt>
+                      <MagneticTilt maxTilt={12} maxOffset={10}>
+                        <a href="https://www.linkedin.com/in/darshan-kasundra12/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" className="block p-2 border border-slate-700 rounded bg-[#0a0f17] hover:bg-cyan-300 hover:text-black transition-colors"><Linkedin size={18} /></a>
+                      </MagneticTilt>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
             </MagneticTilt>
           </motion.div>
 
-          {/* Right Column: 3D Model Viewer — Responsive & Luxury Flow */}
+          {/* Right Column: 3D Model Viewer — Dynamically loaded */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -156,9 +160,22 @@ const Hero = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-300/20 to-transparent blur-3xl rounded-full scale-75 -z-10"></div>
             
-            {/* The 3D container is scaled for mobile and large screens */}
             <div className="w-full max-w-[260px] sm:max-w-[320px] lg:max-w-[460px]">
-              <HumanModel />
+              {isIntroComplete ? (
+                <Suspense
+                  fallback={
+                    <div className="w-full h-[360px] sm:h-[420px] md:h-[500px] lg:h-[min(62vh,520px)] flex items-center justify-center">
+                      <div className="w-12 h-12 border-2 border-zinc-800 border-t-cyan-300 rounded-full animate-spin" />
+                    </div>
+                  }
+                >
+                  <HumanModel />
+                </Suspense>
+              ) : (
+                <div className="w-full h-[360px] sm:h-[420px] md:h-[500px] lg:h-[min(62vh,520px)] flex items-center justify-center">
+                  <div className="w-12 h-12 border-2 border-zinc-800 border-t-cyan-300/40 rounded-full animate-spin" />
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
@@ -171,6 +188,7 @@ const Hero = () => {
             const nextSec = document.getElementById("skills");
             if (nextSec) nextSec.scrollIntoView({ behavior: "smooth" });
           }}
+          aria-label="Scroll to Skills section"
         >
           <ArrowDown className="text-zinc-500 hover:text-cyan-300 transition-colors" size={32} />
         </motion.div>

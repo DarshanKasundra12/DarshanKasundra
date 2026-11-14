@@ -4,6 +4,87 @@ import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import MagneticTilt from "./ui/MagneticTilt";
 
+const projects = [
+  {
+    id: 1,
+    title: "DocConnect",
+    description:
+      "DocConnect is a scalable healthcare management system that enables patient management, appointment scheduling, prescription generation, and billing in a unified platform. It features secure authentication, role-based access control, and PDF-based medical documentation.",
+    image: "/Project Image/DocConnect.png",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Supabase",
+      "Tailwind CSS",
+      "Radix UI",
+      "shadcn/ui",
+      "jsPDF",
+    ],
+    liveUrl: "https://doctor-connect-v2.vercel.app/",
+    githubUrl: "https://github.com/DarshanKasundra12/DoctorConnect",
+    featured: true,
+  },
+  {
+    id: 2,
+    title: "Eklavya - Modern Learning Management System",
+    description:
+      "Eklavya is a full-featured Learning Management System (LMS) providing an exceptional learning experience with course discovery, enrollment, AI-powered examinations, and an interactive UI for students and teachers.",
+    image: "/Project Image/EklavyHome.png",
+    technologies: [
+      "React",
+      "Next.js",
+      "TailwindCSS",
+      "TypeScript",
+      "Prisma",
+      "MySQL",
+      "Clerk",
+      "Vercel",
+    ],
+    liveUrl: "https://eklavya-lms-z19t.onrender.com/",
+    githubUrl: "https://github.com/Kunj-Mori/Eklavya-LMS",
+    featured: true,
+  },
+  {
+    id: 3,
+    title: "E-Commerce Platform",
+    description:
+      "A full-stack e-commerce solution featuring a modern responsive UI, categorized product browsing, dynamic cart and order management, and secure API integration.",
+    image: "/Project Image/Ecommerce-Home.png",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
+    liveUrl: "https://e-commerce-s92u.onrender.com/",
+    githubUrl: "https://github.com/DarshanKasundra12/E-Commerce",
+    featured: true,
+  },
+  {
+    id: 4,
+    title: "FitConnect",
+    description:
+      "A cross-platform mobile fitness tracking application connecting trainers and enthusiasts with workout planning, body progress tracking, and community features.",
+    image: "/Project Image/FitConnectApp.png",
+    technologies: ["Flutter", "Firebase", "Provider", "Dart"],
+    liveUrl: "https://fit-connect-mocha.vercel.app/",
+    githubUrl: "https://github.com/DarshanKasundra12/FitConnect",
+    featured: true,
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
 const Projects = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -11,88 +92,6 @@ const Projects = () => {
     offset: ["start end", "end start"],
   });
   const parallaxY = useTransform(scrollYProgress, [0, 1], [45, -45]);
-
-  const projects = [
-    {
-      id: 1,
-      title: "DocConnect",
-      description:
-        "DocConnect is a scalable healthcare management system that enables patient management, appointment scheduling, prescription generation, and billing in a unified platform. It features secure authentication, role-based access control, and PDF-based medical documentation.",
-      image: "Project Image/DocConnect.png",
-      technologies: [
-        "React",
-        "TypeScript",
-        "Supabase",
-        "Tailwind CSS",
-        "Radix UI",
-        "shadcn/ui",
-        "jsPDF",
-      ],
-      liveUrl: "https://doctor-connect-v2.vercel.app/",
-      githubUrl: "https://github.com/DarshanKasundra12/DoctorConnect",
-      featured: true,
-    },
-    {
-      id: 2,
-      title: "Eklavya - Modern Learning Management System",
-      description:
-        "Eklavya is a full-featured Learning Management System (LMS) providing an exceptional learning experience with course discovery, enrollment, AI-powered examinations, and an interactive UI for students and teachers.",
-      image: "/Project Image/EklavyHome.png",
-      technologies: [
-        "React",
-        "Next.js",
-        "TailwindCSS",
-        "TypeScript",
-        "Prisma",
-        "MySQL",
-        "Clerk",
-        "Vercel",
-      ],
-      liveUrl: "https://eklavya-lms-z19t.onrender.com//",
-      githubUrl: "https://github.com/Kunj-Mori/Eklavya-LMS",
-      featured: true,
-    },
-    {
-      id: 3,
-      title: "E-Commerce Platform",
-      description:
-        "A full-stack e-commerce solution with modern UI, payment integration. But the database is currently no worked.",
-      image: "/Project Image/Ecommerce-Home.png",
-      technologies: ["React", "Node.js", "MongoDB", "Express"],
-      liveUrl: "https://e-commerce-s92u.onrender.com/",
-      githubUrl: "https://github.com/DarshanKasundra12/E-Commerce",
-      featured: true,
-    },
-    {
-      id: 4,
-      title: "FitConnect",
-      description:
-        "Fit Connect is likely a fitness platform designed to connect Fit.",
-      image: "/Project Image/FitConnectApp.png",
-      technologies: ["Flutter", "Firebase", "Provider", "Dart"],
-      liveUrl: "https://fit-connect-mocha.vercel.app/",
-      githubUrl: "https://github.com/DarshanKasundra12/FitConnect",
-      featured: true,
-    },
-    
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
 
   return (
     <section
@@ -130,14 +129,13 @@ const Projects = () => {
           {projects.map((project) => (
             <MagneticTilt key={project.id} className="rounded-xl">
               <motion.div
-                key={project.id}
                 variants={itemVariants}
                 whileHover={{
                   y: -5,
                   scale: 1.01,
                   boxShadow: "0 0 40px rgba(255,255,255,0.15)",
                 }}
-                className="group rounded-xl border border-slate-700/70 dev-glass dev-card overflow-hidden flex flex-col transition-all duration-300 relative"
+                className="group rounded-xl border border-slate-700/70 dev-glass dev-card overflow-hidden flex flex-col transition-all duration-300 relative h-full"
               >
                 {project.featured && (
                   <div className="absolute top-0 right-0 z-20">
@@ -166,6 +164,8 @@ const Projects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-48 object-cover transition-all duration-500 hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
@@ -208,7 +208,7 @@ const Projects = () => {
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 pt-4 border-t border-zinc-800">
+                  <div className="flex flex-wrap gap-2 pt-4 border-t border-zinc-800 mt-auto">
                     {project.technologies.slice(0, 5).map((tech) => (
                       <span
                         key={tech}

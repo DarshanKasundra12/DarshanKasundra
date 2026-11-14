@@ -11,7 +11,6 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import CursorBubble from "@/components/CursorBubble";
-import CustomScrollbar from "@/components/CustomScrollbar";
 
 function ScrollProgressBar() {
   const { scrollYProgress } = useScroll();
@@ -33,19 +32,17 @@ const Index = () => {
     // Prevent scrolling during intro
     document.body.style.overflow = "hidden";
 
-    // Phase 1: NAME reveal (2.2s)
+    // Phase 1: NAME reveal (1.4s)
     const zoomTimer = setTimeout(() => {
       setIntroPhase("ZOOM");
-    }, 2200);
+    }, 1400);
 
-    // Phase 2: ZOOM transition (1s)
+    // Phase 2: COMPLETE (0.7s zoom, then seamless reveal)
     const completeTimer = setTimeout(() => {
       setIntroPhase("COMPLETE");
       setActiveSection("home");
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-      // Re-enable scrolling after intro
       document.body.style.overflow = "auto";
-    }, 3200);
+    }, 2100);
 
     return () => {
       clearTimeout(zoomTimer);
@@ -56,27 +53,34 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
       if (introPhase !== "COMPLETE") return;
 
-      const sections = ["home", "skills", "projects", "certificates", "experience", "about", "contact"];
-      const scrollPosition = window.scrollY + 100;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const sections = ["home", "skills", "projects", "certificates", "experience", "about", "contact"];
+          const scrollPosition = window.scrollY + 100;
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
-          
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
+          for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+              const offsetTop = element.offsetTop;
+              const offsetHeight = element.offsetHeight;
+              
+              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                setActiveSection(section);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [introPhase]);
 
@@ -90,13 +94,15 @@ const Index = () => {
         <div className="scanline-overlay" />
         <ScrollProgressBar />
         
-        {/* Cinematic Framer Motion Intro: Zoom-into-D */}
-        <AnimatePresence mode="wait">
+        {/* Cinematic Intro: Zero-Lag Zoom Overlay */}
+        <AnimatePresence>
           {introPhase !== "COMPLETE" && (
             <motion.div
               key="intro-container"
+              initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden pointer-events-auto"
             >
               <div className="relative flex items-center justify-center">
                 {/* The Full Name "DARSHAN" */}
@@ -107,35 +113,35 @@ const Index = () => {
                     animate={
                       introPhase === "NAME" 
                         ? { opacity: 1, scale: 1, x: 0 } 
-                        : { scale: 80, x: "10vw", opacity: [1, 1, 0], transition: { duration: 1.2, ease: [0.77, 0, 0.175, 1] } }
+                        : { scale: 16, x: "6vw", opacity: [1, 1, 0], transition: { duration: 0.7, ease: [0.77, 0, 0.175, 1] } }
                     }
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="text-7xl md:text-9xl font-black text-white uppercase inline-block origin-center z-50"
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="text-7xl md:text-9xl font-black text-white uppercase inline-block origin-center z-50 will-change-transform"
                   >
                     D
                   </motion.span>
 
-                  {/* Remaining Letters "ARSHAN" - they fly away during zoom */}
+                  {/* Remaining Letters "ARSHAN" */}
                   <motion.span
                     initial={{ opacity: 0, x: 20 }}
                     animate={
                       introPhase === "NAME" 
                         ? { opacity: 1, x: 0 } 
-                        : { opacity: 0, x: 100, transition: { duration: 0.4 } }
+                        : { opacity: 0, x: 80, transition: { duration: 0.3 } }
                     }
-                    transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                    className="text-7xl md:text-9xl font-black text-white uppercase inline-block ml-2"
+                    transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                    className="text-7xl md:text-9xl font-black text-white uppercase inline-block ml-2 will-change-transform"
                   >
                     ARSHAN
                   </motion.span>
                 </div>
 
-                {/* The Cinematic "Line" cut effect from Phase 1 */}
+                {/* The Cinematic "Line" cut effect */}
                 {introPhase === "NAME" && (
                   <motion.div 
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: [0, 1.2, 0], opacity: [0, 1, 0] }}
-                    transition={{ duration: 1.5, delay: 0.6, times: [0, 0.5, 1] }}
+                    transition={{ duration: 1.2, delay: 0.4, times: [0, 0.5, 1] }}
                     className="h-[2px] bg-white w-screen absolute top-1/2 left-1/2 -translate-x-1/2 z-[60] origin-center"
                   />
                 )}
@@ -144,33 +150,21 @@ const Index = () => {
           )}
         </AnimatePresence>
 
-        {/* Portfolio Content — Zooms "OUT" from the D portal reveal */}
-        <AnimatePresence>
-          {introPhase === "COMPLETE" && (
-            <>
-              {/* These components must be outside the scaled/filtered container to remain fixed to the viewport */}
-              <CursorBubble />
-              <Navbar activeSection={activeSection} />
-              
-              <motion.div
-                initial={{ scale: 1.5, opacity: 0, filter: "blur(20px)" }}
-                animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-                transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-                className="relative z-10"
-              >
-                <motion.div id="home" className="reveal-up" transition={{ delay: 0.05 }}><Hero /></motion.div>
-                <motion.div id="skills" className="reveal-up" transition={{ delay: 0.1 }}><Skills /></motion.div>
-                <motion.div id="projects" className="reveal-up" transition={{ delay: 0.15 }}><Projects /></motion.div>
-                <motion.div id="certificates" className="reveal-up" transition={{ delay: 0.2 }}><Certificates /></motion.div>
-                <motion.div id="experience" className="reveal-up" transition={{ delay: 0.25 }}><Experience /></motion.div>
-                <motion.div id="about" className="reveal-up" transition={{ delay: 0.3 }}><About /></motion.div>
-                <motion.div id="contact" className="reveal-up" transition={{ delay: 0.35 }}><Contact /></motion.div>
-                
-                <Footer />
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
+        {/* Global Interactive Elements */}
+        <CursorBubble />
+        <Navbar activeSection={activeSection} />
+        
+        {/* Portfolio Content — Pre-mounted to eliminate post-transition render lag */}
+        <div className="relative z-10">
+          <div id="home"><Hero isIntroComplete={introPhase === "COMPLETE"} /></div>
+          <div id="skills"><Skills /></div>
+          <div id="projects"><Projects /></div>
+          <div id="certificates"><Certificates /></div>
+          <div id="experience"><Experience /></div>
+          <div id="about"><About /></div>
+          <div id="contact"><Contact /></div>
+          <Footer />
+        </div>
       </div>
     </ThemeProvider>
   );

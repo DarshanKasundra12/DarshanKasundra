@@ -1,42 +1,42 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { 
-  Code2, Database, Zap, GitBranch, Monitor, Terminal, LayoutTemplate, Layers, Frame, Lock, Server, Smartphone
+  Code2, Database, GitBranch, Monitor, Terminal, LayoutTemplate, Layers, Lock, Server, Smartphone
 } from "lucide-react";
 import { useRef } from "react";
 import MagneticTilt from "./ui/MagneticTilt";
+
+const skills = [
+  { name: "Node.js", icon: Server, code: "npm install express cors" },
+  { name: "React.js", icon: Code2, code: "npx create-react-app ." },
+  { name: "Next.js", icon: Layers, code: "npx create-next-app@latest" },
+  { name: "TypeScript", icon: Code2, code: "tsc --init" },
+  { name: "MongoDB", icon: Database, code: "db.collection.insertOne()" },
+  { name: "Express.js", icon: Server, code: "app.listen(3000, () => {})" },
+  { name: "Tailwind CSS", icon: LayoutTemplate, code: "npm install -D tailwindcss" },
+  { name: "PHP", icon: Code2, code: "<?php echo 'Hello'; ?>" },
+  { name: "Laravel", icon: Code2, code: "php artisan serve" },
+  { name: "SQL", icon: Database, code: "SELECT * FROM users;" },
+  { name: "Supabase", icon: Database, code: "supabase start" },
+  { name: "Git", icon: GitBranch, code: "git commit -m 'init'" },
+  { name: "Docker", icon: Monitor, code: "docker-compose up -d" },
+  { name: "Flutter", icon: Smartphone, code: "flutter run" },
+  { name: "Ethical Hacking", icon: Lock, code: "nmap -sS -v db" }
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.15 } }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.95, y: 20 },
+  visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+};
 
 const Skills = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
   const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
-
-  const skills = [
-    { name: "Node.js", icon: Server, code: "npm install express cors" },
-    { name: "React.js", icon: Code2, code: "npx create-react-app ." },
-    { name: "Next.js", icon: Layers, code: "npx create-next-app@latest" },
-    { name: "TypeScript", icon: Code2, code: "tsc --init" },
-    { name: "MongoDB", icon: Database, code: "db.collection.insertOne()" },
-    { name: "Express.js", icon: Server, code: "app.listen(3000, () => {})" },
-    { name: "Tailwind CSS", icon: LayoutTemplate, code: "npm install -D tailwindcss" },
-    { name: "PHP", icon: Code2, code: "<?php echo 'Hello'; ?>" },
-    { name: "Laravel", icon: Code2, code: "php artisan serve" },
-    { name: "SQL", icon: Database, code: "SELECT * FROM users;" },
-    { name: "Supabase", icon: Database, code: "supabase start" },
-    { name: "Git", icon: GitBranch, code: "git commit -m 'init'" },
-    { name: "Docker", icon: Monitor, code: "docker-compose up -d" },
-    { name: "Flutter", icon: Smartphone, code: "flutter run" },
-    { name: "Ethical Hacking", icon: Lock, code: "nmap -sS -v db" }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.95, y: 20 },
-    visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
-  };
 
   return (
     <section id="skills" ref={sectionRef} className="py-20 bg-transparent relative">
@@ -77,39 +77,35 @@ const Skills = () => {
                 whileHover={{ y: -5, scale: 1.02, boxShadow: "0 0 30px rgba(255,255,255,0.1)" }}
                 className="rounded-xl border border-slate-700/70 dev-glass dev-card overflow-hidden flex flex-col group cursor-default"
               >
-              <div className="flex items-center px-4 py-2 border-b border-slate-700/70 bg-[#0f1520]">
-                <div className="flex space-x-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-rose-400/60"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-amber-300/60"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-cyan-300/60"></div>
-                </div>
-                <div className="mx-auto flex items-center space-x-2 text-zinc-500 text-[10px] font-mono font-bold tracking-wider uppercase group-hover:text-cyan-200 transition-colors">
-                  <Terminal size={10} />
-                  <span>{skill.name.toLowerCase().replace(" ", "-")}.sh</span>
-                </div>
-              </div>
-              <div className="p-5 flex-grow flex flex-col items-start justify-center font-mono relative overflow-hidden">
-                <div className="absolute -right-4 -bottom-4 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-500 pointer-events-none">
-                  <skill.icon size={120} />
-                </div>
-                
-                <div className="flex items-center mb-3 text-white z-10 w-full">
-                  <div className="p-2 bg-[#111927] border border-slate-700 rounded shadow-md mr-4 group-hover:shadow-[0_0_15px_rgba(59,226,255,0.45)] group-hover:border-cyan-300 transition-all duration-300">
-                    <skill.icon size={20} className="text-zinc-300 group-hover:text-cyan-200" />
+                <div className="flex items-center px-4 py-2 border-b border-slate-700/70 bg-[#0f1520]">
+                  <div className="flex space-x-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-rose-400/60"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-amber-300/60"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-cyan-300/60"></div>
                   </div>
-                  <h3 className="text-lg font-bold tracking-wide">{skill.name}</h3>
+                  <div className="mx-auto flex items-center space-x-2 text-zinc-500 text-[10px] font-mono font-bold tracking-wider uppercase group-hover:text-cyan-200 transition-colors">
+                    <Terminal size={10} />
+                    <span>{skill.name.toLowerCase().replace(" ", "-")}.sh</span>
+                  </div>
                 </div>
-                
-                <div className="text-xs text-zinc-400 bg-[#070b12] border border-slate-800 p-3 rounded w-full flex items-center overflow-x-auto whitespace-nowrap z-10 font-mono shadow-inner">
-                  <span className="text-zinc-600 mr-2">$</span>
-                  <span className="text-zinc-300 font-bold tracking-widest leading-none">{skill.code}</span>
-                  <motion.span
-                    animate={{ opacity: [1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                    className="inline-block w-[6px] h-[14px] bg-cyan-300 ml-2 align-middle shadow-[0_0_10px_rgba(59,226,255,0.85)]"
-                  />
+                <div className="p-5 flex-grow flex flex-col items-start justify-center font-mono relative overflow-hidden">
+                  <div className="absolute -right-4 -bottom-4 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-500 pointer-events-none">
+                    <skill.icon size={120} />
+                  </div>
+                  
+                  <div className="flex items-center mb-3 text-white z-10 w-full">
+                    <div className="p-2 bg-[#111927] border border-slate-700 rounded shadow-md mr-4 group-hover:shadow-[0_0_15px_rgba(59,226,255,0.45)] group-hover:border-cyan-300 transition-all duration-300">
+                      <skill.icon size={20} className="text-zinc-300 group-hover:text-cyan-200" />
+                    </div>
+                    <h3 className="text-lg font-bold tracking-wide">{skill.name}</h3>
+                  </div>
+                  
+                  <div className="text-xs text-zinc-400 bg-[#070b12] border border-slate-800 p-3 rounded w-full flex items-center overflow-x-auto whitespace-nowrap z-10 font-mono shadow-inner">
+                    <span className="text-zinc-600 mr-2">$</span>
+                    <span className="text-zinc-300 font-bold tracking-widest leading-none">{skill.code}</span>
+                    <span className="inline-block w-[6px] h-[14px] bg-cyan-300 ml-2 align-middle animate-pulse shadow-[0_0_10px_rgba(59,226,255,0.85)]" />
+                  </div>
                 </div>
-              </div>
               </motion.div>
             </MagneticTilt>
           ))}
