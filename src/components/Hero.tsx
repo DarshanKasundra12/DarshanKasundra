@@ -111,7 +111,7 @@ const Hero = ({ isIntroComplete = true }: HeroProps) => {
                   </div>
                   <div className="flex items-start space-x-3 ml-4">
                     <span className="text-zinc-600 shrink-0">04</span>
-                    <p className="text-zinc-300">current: <span className="text-lime-300">"Frontend Dev @ Theta Technolabs"</span>,</p>
+                    <p className="text-zinc-300">current: <span className="text-lime-300">"Software Dev @ Theta Technolabs"</span>,</p>
                   </div>
                   <div className="flex items-start space-x-3 ml-4">
                     <span className="text-zinc-600 shrink-0">05</span>
